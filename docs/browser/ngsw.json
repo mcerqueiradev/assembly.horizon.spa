@@ -1,0 +1,131 @@
+{
+  "configVersion": 1,
+  "timestamp": 1741635193082,
+  "index": "/assembly.horizon.spa/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assembly.horizon.spa/chunk-6OEC336D.js",
+        "/assembly.horizon.spa/chunk-A6U4UNAR.js",
+        "/assembly.horizon.spa/chunk-HUTNKQUY.js",
+        "/assembly.horizon.spa/chunk-KFKMIQK7.js",
+        "/assembly.horizon.spa/chunk-YE5MTECL.js",
+        "/assembly.horizon.spa/favicon.ico",
+        "/assembly.horizon.spa/index.html",
+        "/assembly.horizon.spa/main-N6EX2ROZ.js",
+        "/assembly.horizon.spa/manifest.webmanifest",
+        "/assembly.horizon.spa/polyfills-FFHMD2TL.js",
+        "/assembly.horizon.spa/styles-LX4ZWAD7.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/assembly.horizon.spa/1.jpg",
+        "/assembly.horizon.spa/2.jpg",
+        "/assembly.horizon.spa/3.jpg",
+        "/assembly.horizon.spa/4.jpg",
+        "/assembly.horizon.spa/arct.jpg",
+        "/assembly.horizon.spa/avatar/01.png",
+        "/assembly.horizon.spa/avatar/02.png",
+        "/assembly.horizon.spa/cover.png",
+        "/assembly.horizon.spa/device.png",
+        "/assembly.horizon.spa/fonts/ppneuemontreal-bold.woff",
+        "/assembly.horizon.spa/fonts/ppneuemontreal-book.woff",
+        "/assembly.horizon.spa/fonts/ppneuemontreal-italic.woff",
+        "/assembly.horizon.spa/fonts/ppneuemontreal-medium.woff",
+        "/assembly.horizon.spa/fonts/ppneuemontreal-semibolditalic.woff",
+        "/assembly.horizon.spa/fonts/ppneuemontreal-thin.woff",
+        "/assembly.horizon.spa/hover/1.jpg",
+        "/assembly.horizon.spa/hover/2.jpg",
+        "/assembly.horizon.spa/hover/3.jpg",
+        "/assembly.horizon.spa/hover/4.jpg",
+        "/assembly.horizon.spa/hover/5.jpg",
+        "/assembly.horizon.spa/icons/icon-128x128.png",
+        "/assembly.horizon.spa/icons/icon-144x144.png",
+        "/assembly.horizon.spa/icons/icon-152x152.png",
+        "/assembly.horizon.spa/icons/icon-192x192.png",
+        "/assembly.horizon.spa/icons/icon-384x384.png",
+        "/assembly.horizon.spa/icons/icon-512x512.png",
+        "/assembly.horizon.spa/icons/icon-72x72.png",
+        "/assembly.horizon.spa/icons/icon-96x96.png",
+        "/assembly.horizon.spa/noise.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/assembly.horizon.spa/1.jpg": "074a072bbf8a0b3870e64aa8166d6f510212ffb5",
+    "/assembly.horizon.spa/2.jpg": "b7e60d843d208bfb022aa101a8f25317092d6634",
+    "/assembly.horizon.spa/3.jpg": "d2778248aab936fbb23955f9872975122564740a",
+    "/assembly.horizon.spa/4.jpg": "22a41ef86c51970a75e5e216ea8082ddcf47bb43",
+    "/assembly.horizon.spa/arct.jpg": "b855f830626782a61fc5c352fc1e3e32ac65e5b2",
+    "/assembly.horizon.spa/avatar/01.png": "8964cf20017043c8c7b46d403f295e419b88fd44",
+    "/assembly.horizon.spa/avatar/02.png": "36c494fef6ef38e7026d82cf90089bef45c5f314",
+    "/assembly.horizon.spa/chunk-6OEC336D.js": "10aa9909d0d3664a65f566e1c3791098d2639896",
+    "/assembly.horizon.spa/chunk-A6U4UNAR.js": "c5ab501842562037eb67b05a49a8e84277a81f61",
+    "/assembly.horizon.spa/chunk-HUTNKQUY.js": "08a0ba42b78e766bc50d41227ab35b259e893ceb",
+    "/assembly.horizon.spa/chunk-KFKMIQK7.js": "6191f125d6ac27d261816f97b5e67fdb52c5c91e",
+    "/assembly.horizon.spa/chunk-YE5MTECL.js": "39961b2b97778d41ca053f978fafea6d35db5693",
+    "/assembly.horizon.spa/cover.png": "e89d21f1918ee52f018b067821a880d53f89cb8b",
+    "/assembly.horizon.spa/device.png": "76b5c57f07e00a5be72a3a79fc3533f53cbde407",
+    "/assembly.horizon.spa/favicon.ico": "e375d642223f2e747ba286b11719a8ab52563af1",
+    "/assembly.horizon.spa/fonts/ppneuemontreal-bold.woff": "7c86c2a9c8f8e428a76e2ac5cc36c1c3bfd8b1e9",
+    "/assembly.horizon.spa/fonts/ppneuemontreal-book.woff": "379961ea4f4a0ac9b0cddcc9fc073ba5038ceac1",
+    "/assembly.horizon.spa/fonts/ppneuemontreal-italic.woff": "716b108fbd54fb97a1bba062c63e3b05a4aee761",
+    "/assembly.horizon.spa/fonts/ppneuemontreal-medium.woff": "9a3b041543e5747bff892a07730ebcdbaa355fe9",
+    "/assembly.horizon.spa/fonts/ppneuemontreal-semibolditalic.woff": "4f0ae412a3fbebe35e15db3ad4de647387b3ac5c",
+    "/assembly.horizon.spa/fonts/ppneuemontreal-thin.woff": "7d648689b5514902820525faba958d4ca0adaa68",
+    "/assembly.horizon.spa/hover/1.jpg": "e2aff735e20ae27c75cc66a968b7bc2bcb89a98a",
+    "/assembly.horizon.spa/hover/2.jpg": "bbb3e09427c16496db02c15313c0e9a77b59808f",
+    "/assembly.horizon.spa/hover/3.jpg": "af239f0c8548dbca9235e62e0daa1e63313f36c9",
+    "/assembly.horizon.spa/hover/4.jpg": "b6199012fcaa6ad6422801df737778eede2933d4",
+    "/assembly.horizon.spa/hover/5.jpg": "075e0ec6be6a8445841d1b867ca7f32546d2e510",
+    "/assembly.horizon.spa/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/assembly.horizon.spa/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/assembly.horizon.spa/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/assembly.horizon.spa/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/assembly.horizon.spa/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/assembly.horizon.spa/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/assembly.horizon.spa/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/assembly.horizon.spa/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/assembly.horizon.spa/index.html": "7ae06f6264a203dcdb758b06618e44dda833d7e1",
+    "/assembly.horizon.spa/main-N6EX2ROZ.js": "6576760e537635c41c641f0552617efc821ba407",
+    "/assembly.horizon.spa/manifest.webmanifest": "1afccddf187b943bda3d230f033ece5fbf03545f",
+    "/assembly.horizon.spa/noise.png": "9c5b2a24b378a5c9d5c5020dd71802d1cd3ba385",
+    "/assembly.horizon.spa/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
+    "/assembly.horizon.spa/styles-LX4ZWAD7.css": "8b48fb8ecfd81870362b88749c60a360b359dba0"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
