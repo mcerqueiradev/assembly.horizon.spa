@@ -1,0 +1,292 @@
+<div class="flex flex-col font-inter xl:ml-64 px-10 my-20 md:mt-0">
+  <div class="mb-10">
+    <h4 class="bg-clip-text text-transparent text-xs font-semibold bg-gray-400 mb-2">Register your property in our platform.</h4>
+    <div class="flex gap-2 items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-blue-500">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"
+        />
+      </svg>
+
+      <h3 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white">Property Registration</h3>
+    </div>
+  </div>
+  <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="space-y-8">
+    <!-- Basic Information -->
+    <div class="space-y-5">
+      <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Property Title</label>
+      <input
+        type="text"
+        formControlName="title"
+        placeholder="Enter property title"
+        class="font-bold w-full text-white placeholder:text-gray-400 bg-transparent text-4xl ring-0 focus:ring-0 focus:outline-none"
+      />
+    </div>
+
+    <!-- Description -->
+    <div class="space-y-3">
+      <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Description</label>
+      <textarea
+        formControlName="description"
+        rows="4"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        placeholder="Describe your property"
+      ></textarea>
+    </div>
+
+    <!-- Property Details Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Size -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Size (sq ft)</label>
+        <input
+          type="number"
+          formControlName="size"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+
+      <!-- Bedrooms -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Bedrooms</label>
+        <input
+          type="number"
+          formControlName="bedrooms"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+
+      <!-- Bathrooms -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Bathrooms</label>
+        <input
+          type="number"
+          formControlName="bathrooms"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+    </div>
+
+    <!-- Address Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Street -->
+      <div class="md:col-span-2">
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Street Address</label>
+        <input
+          type="text"
+          formControlName="street"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+
+      <div class="md:col-span-1">
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Postal Code</label>
+        <input
+          type="number"
+          formControlName="postalCode"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+
+      <!-- City and State -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">City</label>
+        <input
+          type="text"
+          formControlName="city"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">State</label>
+        <input
+          type="text"
+          formControlName="state"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Country</label>
+        <div class="relative">
+          <select
+            formControlName="country"
+            class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            id="country"
+          >
+            <option value="" class="bg-gray-800">Select a country</option>
+            <option *ngFor="let country of countries" [value]="country" class="bg-gray-800">
+              {{ country }}
+            </option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Classifications -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Category -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Category</label>
+        <select
+          formControlName="categoryId"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option *ngFor="let category of categories" [value]="category.id" class="bg-gray-800">{{ category.name }}</option>
+        </select>
+      </div>
+
+      <!-- Type -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Type</label>
+        <select
+          formControlName="type"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option *ngFor="let option of propertyTypeOptions" [value]="option.value" class="bg-gray-800">{{ option.label }}</option>
+        </select>
+      </div>
+
+      <!-- Status -->
+      <div>
+        <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Status</label>
+        <select
+          formControlName="status"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option *ngFor="let status of propertyStatuses" [value]="status" class="bg-gray-800">{{ status }}</option>
+        </select>
+      </div>
+    </div>
+    <!-- Amenities -->
+    <div class="space-y-3">
+      <label class="block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Amenities</label>
+
+      <div formArrayName="amenities">
+        <select
+          (change)="addAmenity($event)"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option value="" class="bg-gray-800">Select an amenity</option>
+          <option *ngFor="let amenity of availableAmenities" [value]="amenity" class="bg-gray-800">
+            {{ amenity }}
+          </option>
+        </select>
+
+        <ul class="flex flex-wrap gap-2 mt-3">
+          <li *ngFor="let amenity of selectedAmenities" class="flex items-center gap-2 pl-4 pr-1.5 py-1.5 rounded-full bg-blue-500/20 text-blue-400 text-sm font-medium">
+            <span>{{ amenity }}</span>
+            <button type="button" (click)="removeAmenity(amenity)" class="rounded-full p-1 hover:bg-blue-500/30 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                <path
+                  d="M5.28 4.22a.75.75 0 0 0-1.06 1.06L6.94 8l-2.72 2.72a.75.75 0 1 0 1.06 1.06L8 9.06l2.72 2.72a.75.75 0 1 0 1.06-1.06L9.06 8l2.72-2.72a.75.75 0 0 0-1.06-1.06L8 6.94 5.28 4.22Z"
+                />
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label class="mb-3 block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Price</label>
+      <input
+        type="number"
+        formControlName="price"
+        placeholder="$0.00"
+        class="font-bold w-full text-white placeholder:text-gray-400 bg-transparent text-7xl ring-0 focus:ring-0 focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+      />
+    </div>
+
+    <!-- Image Upload -->
+    <div class="space-y-3">
+      <label class="block text-sm font-semibold text-transparent bg-clip-text bg-gray-600">Property Images</label>
+
+      <div class="mt-2 flex flex-col items-center justify-center rounded-xl border border-dashed border-gray-700/30 bg-gray-800/30 px-6 py-10">
+        <div class="text-center">
+          <svg class="mx-auto h-12 w-12 text-gray-300" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              fill-rule="evenodd"
+              d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+              clip-rule="evenodd"
+            />
+          </svg>
+
+          <div class="mt-4 flex items-center justify-center text-sm leading-6 text-gray-400">
+            <label
+              for="upload"
+              class="relative cursor-pointer rounded-md bg-gray-800/50 px-4 py-2 font-semibold text-blue-500 hover:text-blue-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-blue-500 focus-within:ring-offset-2"
+            >
+              <span>Upload files</span>
+              <input id="upload" type="file" (change)="onFileSelected($event)" multiple class="sr-only" accept=".jpg,.jpeg,.png" />
+            </label>
+            <p class="pl-2">or drag and drop</p>
+          </div>
+
+          <p class="mt-2 text-xs leading-5 text-gray-400">PNG, JPG, GIF up to 10MB</p>
+        </div>
+      </div>
+
+      <div id="uploadedImages" class="grid grid-cols-4 gap-4 mt-4">
+        <!-- Preview images will be displayed here -->
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="w-full bg-blue-500 rounded-xl py-4 px-4 flex items-center justify-center">
+      <span class="bg-clip-text text-transparent text-sm font-semibold bg-white">Register Property</span>
+    </button>
+
+    <h4 class="text-center bg-clip-text text-transparent text-xs font-semibold bg-gray-500">
+      By registering this property, you agree to our terms<br />
+      and conditions.
+    </h4>
+  </form>
+
+  <!-- CONFIRMATION MODAL  *ngIf="loginSuccess" -->
+  <div *ngIf="addpropertySuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+    <div class="flex items-center justify-center bg-emerald-500 w-14">
+      <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-emerald-500">Success</span>
+        <p class="text-sm text-slate-300">Redirecting to dashboard...</p>
+      </div>
+    </div>
+  </div>
+  <!--ERROR MODAL *ngIf="loginFailure" -->
+  <div *ngIf="addpropertyFailure" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+    <div class="flex items-center justify-center w-14 bg-red-500">
+      <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-red-500">Error</span>
+        <p class="text-sm text-slate-300">
+          There was an error creating the property. <br />
+          Please check your input and try again.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

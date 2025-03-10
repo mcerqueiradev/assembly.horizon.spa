@@ -1,0 +1,204 @@
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-5 w-svw">
+  <!-- Properties List -->
+  <div
+    class="overflow-y-auto max-h-screen p-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800/30 [&::-webkit-scrollbar-thumb]:bg-gray-600 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500"
+  >
+    <!-- FILTERS -->
+    <div class="my-5 md:my-10">
+      <!-- Header Section -->
+      <div class="flex justify-between items-center">
+        <div class="mb-10">
+          <h4 class="text-xs font-medium text-gray-400">Property Management System</h4>
+          <div class="flex items-center gap-2 mt-1">
+            <h3 class="font-extrabold text-4xl text-transparent bg-clip-text bg-white">Horizon Properties</h3>
+          </div>
+        </div>
+
+        <!-- View Toggle -->
+        <div class="sm:flex items-center gap-3 hidden">
+          <div class="flex gap-2 bg-gray-800/50 p-1 rounded-lg">
+            <button (click)="setViewMode('list')" [class.bg-blue-500]="viewMode === 'list'" class="p-2 rounded-md text-white transition-all duration-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <button (click)="setViewMode('grid')" [class.bg-blue-500]="viewMode === 'grid'" class="p-2 rounded-md text-white transition-all duration-200">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Search and Filters Bar -->
+      <div class="flex flex-col md:flex-row gap-4">
+        <!-- Search -->
+        <div class="relative w-full md:flex-1">
+          <input
+            type="text"
+            placeholder="Search by location, property type, or features..."
+            class="w-full h-11 px-4 bg-gray-800/50 rounded-lg text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500/50 pl-10 text-xs md:text-sm"
+          />
+          <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 md:h-5 w-4 md:w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="grid grid-cols-2 md:flex gap-2 md:gap-3">
+          <div class="relative">
+            <button (click)="toggleTypeFilter()" class="w-full h-11 px-3 md:px-4 bg-gray-800/50 rounded-lg text-gray-300 hover:bg-gray-700/50 flex items-center gap-2 min-w-[120px] md:min-w-[140px]">
+              <span class="bg-clip-text text-transparent bg-gray-300 font-medium text-xs md:text-sm">Type</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 md:h-4 w-3 md:w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="relative">
+            <button (click)="togglePriceFilter()" class="w-full h-11 px-3 md:px-4 bg-gray-800/50 rounded-lg text-gray-300 hover:bg-gray-700/50 flex items-center gap-2 min-w-[120px] md:min-w-[140px]">
+              <span class="bg-clip-text text-transparent bg-gray-300 font-medium text-xs md:text-sm">Price Range</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 md:h-4 w-3 md:w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="relative">
+            <button (click)="toggleStatusFilter()" class="w-full h-11 px-3 md:px-4 bg-gray-800/50 rounded-lg text-gray-300 hover:bg-gray-700/50 flex items-center gap-2 min-w-[120px] md:min-w-[140px]">
+              <span class="bg-clip-text text-transparent bg-gray-300 font-medium text-xs md:text-sm">Status</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 md:h-4 w-3 md:w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+
+          <!-- Clear Filters -->
+          <button class="w-full h-11 px-3 md:px-4 bg-blue-500/10 rounded-lg hover:bg-blue-500/20 transition-all duration-200">
+            <span class="bg-clip-text text-transparent bg-blue-400 font-medium text-xs md:text-sm">Clear Filters</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Filters -->
+      <div class="flex gap-2 flex-wrap mt-3 md:mt-5">
+        <div class="bg-blue-500/10 px-2 md:px-3 py-1 rounded-full flex items-center gap-1 md:gap-2">
+          <span class="bg-clip-text text-transparent bg-blue-400 font-medium text-[10px] md:text-xs">House</span>
+          <button class="hover:text-blue-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-2.5 md:size-3 text-blue-400">
+              <path
+                d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Properties -->
+    <ul class="grid gap-6 grid-cols-1 lg:grid-cols-2">
+      @for (property of properties.slice().reverse(); track $index) {
+      <li
+        (click)="navigateToProperty(property.id!)"
+        (mouseenter)="focusPropertyOnMap(property)"
+        class="col-span-1 cursor-pointer bg-gray-900/50 rounded-xl p-5 hover:bg-gray-900/70 transition-all duration-300"
+      >
+        <div class="bg-gray-900 rounded-xl overflow-hidden aspect-video mb-5">
+          <img *ngIf="property.images && property.images.length > 0; else noImage" [src]="property.images[0].imagePath" alt="Property Image" class="w-full h-full object-cover" />
+        </div>
+
+        <ng-template #noImage>
+          <img src="" alt="Image not available" class="w-full h-full object-cover" />
+        </ng-template>
+
+        <div>
+          <div class="flex items-center justify-between mb-5 gap-5">
+            <h1 class="font-extrabold text-3xl bg-clip-text text-transparent bg-white line-clamp-1 text-balance">
+              {{ property.title }}
+            </h1>
+            <div class="items-center gap-2 bg-gray-800 rounded-full p-2 text-gray-300 hidden sm:flex">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
+                <path
+                  fill-rule="evenodd"
+                  d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm3.844-8.791a.75.75 0 0 0-1.188-.918l-3.7 4.79-1.649-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043l4.25-5.5Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="text-caption"> {{ property.type }}</span>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <ul class="flex items-center gap-5 justify-between *:bg-gray-800/50 *:rounded-full *:p-2 text-xs flex-wrap">
+              <li>
+                <span class="text-caption px-1">{{ property.size }} sqft</span>
+              </li>
+              <li>
+                <span class="text-caption px-1">{{ property.bedrooms }} Bedrooms</span>
+              </li>
+              <li>
+                <span class="text-caption px-1">{{ property.bathrooms }} Bathrooms</span>
+              </li>
+
+              <li>
+                <span class="text-caption px-1">{{ property.coordinates?.lat }} , {{ property.coordinates?.lng }}</span>
+              </li>
+
+              <li>
+                <span class="text-caption px-1">{{ property.status }}</span>
+              </li>
+            </ul>
+
+            <div class="flex items-center gap-2 text-sm text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                <path
+                  fill-rule="evenodd"
+                  d="m9.69 18.933.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 0 0 .281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 1 0 3 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 0 0 2.273 1.765 11.842 11.842 0 0 0 .976.544l.062.029.018.008.006.003ZM10 11.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+
+              <span class="line-clamp-1 font-medium bg-clip-text text-transparent bg-gray-300">{{ property.street }}, {{ property.city }}</span>
+            </div>
+
+            <div class="font-extrabold text-4xl bg-clip-text text-transparent bg-blue-300">
+              {{ property.price | currency }}
+            </div>
+          </div>
+        </div>
+      </li>
+      }
+    </ul>
+
+    <!-- Pagination -->
+    <div class="col-span-3 flex justify-center mt-8">
+      <nav class="flex items-center gap-2">
+        <button class="p-2 rounded-xl bg-gray-800/30 text-gray-400 hover:bg-gray-700/50">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+        <button class="px-4 py-2 rounded-xl bg-blue-500/10 text-blue-400">1</button>
+        <button class="px-4 py-2 rounded-xl hover:bg-gray-800/30 text-gray-400">2</button>
+        <button class="px-4 py-2 rounded-xl hover:bg-gray-800/30 text-gray-400">3</button>
+        <button class="p-2 rounded-xl bg-gray-800/30 text-gray-400 hover:bg-gray-700/50">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="h-screen sticky top-0 hidden sm:block">
+    <google-map height="100%" width="100%" [center]="center" [zoom]="zoom" [options]="mapOptions">
+      <map-marker *ngFor="let property of properties" [position]="property.coordinates || center" [options]="mapOptions" [title]="property.title" (mapClick)="onMarkerClick(property)"> </map-marker>
+    </google-map>
+  </div>
+</div>

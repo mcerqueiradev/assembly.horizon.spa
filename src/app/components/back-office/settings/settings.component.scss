@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+.custom-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(1) sepia(100%) saturate(10000%) hue-rotate(180deg);
+}

@@ -1,0 +1,89 @@
+<div class="flex flex-col font-inter w-full p-5 md:p-10">
+  <!-- Header Section -->
+  <div class="mb-10">
+    <h4 class="bg-clip-text text-transparent text-xs font-semibold bg-gray-300 mb-2">Schedule a visit to view this property.</h4>
+    <div class="flex gap-2 items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 text-blue-600">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
+        />
+      </svg>
+      <h3 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white">Schedule Visit</h3>
+    </div>
+  </div>
+
+  <!-- Form Section -->
+  <form [formGroup]="visitForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="space-y-5">
+      <!-- Date Input -->
+      <div>
+        <app-datepicker formControlName="date" label="Date" (dateChange)="onDateChange($event)"> </app-datepicker>
+      </div>
+
+      <div class="mt-5">
+        <label class="mb-3 block text-caption bg-gray-500">Available Time Slots</label>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          <button
+            *ngFor="let slot of availableTimeSlots"
+            type="button"
+            (click)="selectTimeSlot(slot)"
+            [ngClass]="{
+              'ring-2 ring-blue-500 bg-blue-500/20 border-transparent': selectedTimeSlot === slot,
+              'hover:border-blue-500/50': selectedTimeSlot !== slot
+            }"
+            class="p-3 rounded-xl border border-gray-700/30 bg-gray-800/30 text-gray-300 transition-all duration-200"
+          >
+            <span class="text-sm font-medium text-transparent bg-clip-text bg-white whitespace-nowrap overflow-hidden text-ellipsis">
+              {{ slot }}
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Notes Section -->
+      <div>
+        <label class="mb-3 block text-caption bg-gray-500">Notes</label>
+        <textarea
+          formControlName="notes"
+          placeholder="Any specific requirements or questions..."
+          rows="4"
+          class="block w-full appearance-none text-sm rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-blue-500 rounded-xl py-4 px-4 flex items-center justify-center">
+        <span class="bg-clip-text text-transparent text-sm font-semibold bg-white">Schedule Visit</span>
+      </button>
+
+      <!-- Terms Text -->
+      <h4 class="text-center bg-clip-text text-transparent text-xs font-semibold bg-gray-500">
+        By scheduling a visit, you agree to our terms<br />
+        and visiting guidelines.
+      </h4>
+    </div>
+  </form>
+</div>
+
+<!-- Success Notification -->
+<div *ngIf="visitSuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <!-- Same success notification structure as your transaction form -->
+</div>
+
+<div *ngIf="visitFailed" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <div class="flex items-center justify-center w-12 bg-red-500">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40">
+      <path
+        d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+      ></path>
+    </svg>
+  </div>
+  <div class="px-4 py-2">
+    <div class="mx-3">
+      <span class="font-semibold text-red-500">Error</span>
+      <p class="text-sm text-gray-200">{{ errorMessage }}</p>
+    </div>
+  </div>
+</div>

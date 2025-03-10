@@ -1,0 +1,108 @@
+<div class="flex flex-col font-inter max-w-xl">
+  <h4 class="bg-clip-text text-transparent text-xs font-bold bg-gray-300 mb-2">Add money to pay your invoice.</h4>
+  <div class="flex gap-2 items-center mb-10">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 text-green-600">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+    </svg>
+    <h3 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white">Make a Payment</h3>
+  </div>
+
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()" class="gap-10 flex w-full items-center flex-col justify-center">
+    <div id="inputs" class="mb-5">
+      <div id="amount" class="mb-5">
+        <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="value">Amount</label>
+        <input
+          type="number"
+          id="amount"
+          formControlName="amount"
+          placeholder="$0.00"
+          required
+          class="font-bold w-full text-white placeholder:text-gray-400 bg-transparent text-7xl ring-0 focus:ring-0 focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+        />
+      </div>
+
+      <div class="mb-5 flex gap-5">
+        <div id="contract" class="w-full">
+          <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="contract">Contract</label>
+          <select
+            id="contract"
+            formControlName="contractId"
+            class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            required
+          >
+            <option class="bg-gray-800" value="" disabled selected>Select a contract</option>
+            <option class="bg-gray-800" *ngFor="let contract of contracts" [value]="contract.id">{{ contract.propertyTitle }}</option>
+          </select>
+        </div>
+
+        <div id="paymentMethod" class="w-full">
+          <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="paymentMethod">Payment Method</label>
+          <select
+            id="paymentMethod"
+            formControlName="paymentMethod"
+            class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            required
+          >
+            <option class="bg-gray-800" value="" disabled selected>Select a payment method</option>
+            <option class="bg-gray-800" *ngFor="let method of paymentMethods" [value]="method.id">{{ method.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div id="description">
+        <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          formControlName="description"
+          placeholder="Description"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        />
+      </div>
+    </div>
+    <!-- SUBMIT BUTTON -->
+    <button type="submit" class="bg-green-500 rounded-xl py-4 px-4 flex w-full items-center justify-center">
+      <span class="bg-clip-text text-transparent text-sm font-bold bg-white">Continue</span>
+    </button>
+    <h4 class="bg-clip-text text-transparent text-xs font-bold bg-gray-500 mt-2">
+      By clicking Continue, I authorize Scale to initiate<br />
+      the transaction detailed above.
+    </h4>
+  </form>
+</div>
+
+<div *ngIf="transactionSuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <div class="flex items-center justify-center bg-emerald-500 w-14">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+      />
+    </svg>
+  </div>
+
+  <div class="px-4 py-2 -mx-3">
+    <div class="mx-3">
+      <span class="font-semibold text-emerald-500">Success</span>
+      <p class="text-sm text-slate-300">Redirecting to your transactions...</p>
+    </div>
+  </div>
+</div>
+<!--ERROR MODAL *ngIf="loginFailure" -->
+<div *ngIf="transactionFailure" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <div class="flex items-center justify-center w-14 bg-red-500">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+      />
+    </svg>
+  </div>
+
+  <div class="px-4 py-2 -mx-3">
+    <div class="mx-3">
+      <span class="font-semibold text-red-500">Error</span>
+      <p class="text-sm text-slate-300">
+        There was an error creating the property. <br />
+        Please check your input and try again.
+      </p>
+    </div>
+  </div>
+</div>

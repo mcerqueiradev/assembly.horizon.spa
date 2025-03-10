@@ -1,0 +1,26 @@
+<div class="services relative w-svw">
+  <div class="flex flex-col p-10">
+    <div class="text-[10vw] sm:text-[4vw] text-white leading-[1.1] max-w-screen-xl font-medium mb-20 sm:mb-5" #textContainer>
+      <h3 animate>Premier real estate opportunities</h3>
+      <h3 animate>demand advanced expertise that</h3>
+      <h3 animate>many buyers and sellers have</h3>
+      <h3 animate>struggled to access—until now.</h3>
+    </div>
+    <h1 class="text-[18vw] uppercase bg-clip-text text-transparent bg-white mb-10 leading-normal self-center font-bold sm:font-medium">Services</h1>
+
+    <div class="accordion max-w-screen-xl self-end">
+      <div class="accordion-item border-b border-gray-300/10" *ngFor="let service of services">
+        <div class="accordion-header flex justify-between items-center cursor-pointer sm:p-10 p-5 transition" (click)="toggleAccordion(service)">
+          <div class="flex justify-between mr-5">
+            <h3 class="text-[4vw] sm:text-[2vw] font-medium bg-clip-text text-transparent bg-gray-300 sm:mr-20 mr-5">{{ service.id }}</h3>
+            <h3 class="text-[4vw] sm:text-[2vw] font-medium bg-clip-text text-transparent bg-gray-300">{{ service.title }}</h3>
+          </div>
+          <div class="icon text-xl font-semibold text-gray-300">{{ service.open ? '-' : '+' }}</div>
+        </div>
+        <div class="accordion-content overflow-hidden" #accordionContent>
+          <p class="px-10 pb-10 sm:ml-24 ml-5 text-[4vw] sm:text-[2vw] font-medium bg-clip-text text-transparent bg-gray-400">{{ service.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

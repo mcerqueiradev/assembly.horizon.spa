@@ -1,0 +1,380 @@
+<section class="flex flex-col font-inter p-5 lg:p-10 min-h-screen bg-gray-950 w-svw">
+  <button (click)="navigateToHome()" class="flex items-center gap-2 text-caption bg-gray-900/30 w-fit px-4 py-2 rounded-xl mb-6 hover:bg-gray-900/50 transition-colors">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5 text-gray-400">
+      <path
+        fill-rule="evenodd"
+        d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+
+    <span class="text-caption">Back to Home</span>
+  </button>
+
+  <!-- Header Section -->
+  <div class="flex relative h-64">
+    <img [src]="userProfile.profileCoverUrl ?? '/cover.png'" class="bg-cover object-cover bg-center w-full h-full saturate-50 overflow-hidden rounded-3xl" />
+    @if (isOwnProfile) {
+    <input #fileInput type="file" (change)="updateCoverPhoto($event)" accept="image/*" class="hidden" />
+    <button (click)="triggerFileInput()" class="bg-white rounded-xl absolute right-5 bottom-5 flex items-center justify-center aspect-square size-10">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+        <path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z" />
+        <path
+          fill-rule="evenodd"
+          d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+          clip-rule="evenodd"
+        />
+      </svg>
+    </button>
+    }
+  </div>
+
+  <!-- Profile Section -->
+  <div class="flex flex-col items-center md:items-start px-4 mt-10">
+    <!-- Avatar - Centered -->
+    <div id="avatar" class="relative flex items-center justify-center md:justify-start size-32 rounded-full -mt-24 border-4 border-gray-950 overflow-hidden md:ml-20">
+      @if (isOwnProfile) {
+      <div class="absolute w-full h-full bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-white">
+          <path d="M12 9a3.75 3.75 0 1 0 0 7.5A3.75 3.75 0 0 0 12 9Z" />
+          <path
+            fill-rule="evenodd"
+            d="M9.344 3.071a49.52 49.52 0 0 1 5.312 0c.967.052 1.83.585 2.332 1.39l.821 1.317c.24.383.645.643 1.11.71.386.054.77.113 1.152.177 1.432.239 2.429 1.493 2.429 2.909V18a3 3 0 0 1-3 3h-15a3 3 0 0 1-3-3V9.574c0-1.416.997-2.67 2.429-2.909.382-.064.766-.123 1.151-.178a1.56 1.56 0 0 0 1.11-.71l.822-1.315a2.942 2.942 0 0 1 2.332-1.39ZM6.75 12.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Zm12-1.5a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </div>
+      } @if (user.imageUrl != null ) {
+      <img [src]="user.imageUrl" alt="" [title]="user.firstName" />
+      } @else {
+      <img src="https://avatar.iran.liara.run/public" alt="" srcset="" class="w-full h-full object-cover" />
+      }
+    </div>
+
+    <!-- Profile Info -->
+    <div class="flex-1 w-full">
+      <div class="grid grid-cols-1 md:grid-cols-6 mt-5 gap-5 md:gap-10">
+        <!-- Main Info Section -->
+        <div class="col-span-1 md:col-span-3 xl:col-span-4">
+          <div id="infos" class="flex flex-col items-center md:items-start justify-between h-full">
+            <!-- Name Section -->
+            <div id="name" class="flex items-center gap-3 mb-5 text-center md:text-left">
+              <h1 class="heading-primary text-3xl md:text-4xl font-semibold">{{ user.firstName }} {{ user.lastName }}</h1>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 text-blue-600">
+                <path
+                  fill-rule="evenodd"
+                  d="M8.603 3.799A4.49 4.49 0 0 1 12 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 0 1 3.498 1.307 4.491 4.491 0 0 1 1.307 3.497A4.49 4.49 0 0 1 21.75 12a4.49 4.49 0 0 1-1.549 3.397 4.491 4.491 0 0 1-1.307 3.497 4.491 4.491 0 0 1-3.497 1.307A4.49 4.49 0 0 1 12 21.75a4.49 4.49 0 0 1-3.397-1.549 4.49 4.49 0 0 1-3.498-1.306 4.491 4.491 0 0 1-1.307-3.498A4.49 4.49 0 0 1 2.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 0 1 1.307-3.497 4.49 4.49 0 0 1 3.497-1.307Zm7.007 6.387a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <p id="bio" class="text-body text-center md:text-left">
+              {{ userProfile.bio }}
+            </p>
+            <!-- Social Stats -->
+            <div class="flex flex-wrap justify-center md:justify-start gap-5 md:gap-10 mt-5">
+              <!-- Followers -->
+              <div class="flex flex-col gap-1">
+                <span class="text-value text-lg md:text-2xl">2.5K</span>
+                <span class="text-caption">Followers</span>
+              </div>
+
+              <!-- Following -->
+              <div class="flex flex-col gap-1">
+                <span class="text-value text-lg md:text-2xl">1.2K</span>
+                <span class="text-caption">Following</span>
+              </div>
+
+              <!-- Properties Listed -->
+              <div class="flex flex-col gap-1">
+                <span class="text-value text-lg md:text-2xl">48</span>
+                <span class="text-caption">Properties</span>
+              </div>
+
+              <!-- Reviews -->
+              <div class="flex flex-col gap-1">
+                <span class="text-value text-lg md:text-2xl">4.9</span>
+                <span class="text-caption">Rating</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1 md:col-span-3 xl:col-span-2 relative space-y-4 widget-profile-container">
+          <button *ngIf="isOwnProfile" (click)="openEditModal()" class="bg-white rounded-xl flex items-center justify-center aspect-square size-10 absolute top-5 right-5">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+              <path
+                d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z"
+              />
+            </svg>
+          </button>
+
+          <!-- Location -->
+          <div class="flex flex-col gap-2">
+            <h4 class="text-caption">Location</h4>
+            <span class="text-body bg-white">{{ userProfile.location }}</span>
+          </div>
+
+          <!-- Website -->
+          <div class="flex flex-col gap-2">
+            <h4 class="text-caption">Website</h4>
+            <a [href]="userProfile.website" target="_blank" class="text-body bg-white hover:bg-blue-400 transition-colors">{{ userProfile.website }}</a>
+          </div>
+
+          <!-- Occupation -->
+          <div class="flex flex-col gap-2">
+            <h4 class="text-caption">Occupation</h4>
+            <span class="text-body bg-white">{{ userProfile.occupation }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Posts Section -->
+  <div class="mt-10 grid grid-cols-1 md:grid-cols-6 xl:grid-cols-7 gap-5 xl:gap-10">
+    <!-- Main Content -->
+    <div class="col-span-1 md:col-span-4 xl:col-span-5">
+      <!-- Navigation -->
+      <div class="flex overflow-x-hidden justify-center lg:justify-start widget-profile-container divide-x p-0 divide-gray-800/50">
+        <button class="text-caption bg-white px-4 md:px-8 py-5 text-center whitespace-nowrap">Posts</button>
+        <button class="text-caption px-4 md:px-8 py-5 text-center whitespace-nowrap">Properties</button>
+        <button class="text-caption px-4 md:px-8 py-5 text-center whitespace-nowrap">Reviews</button>
+        <button class="text-caption px-4 md:px-8 py-5 text-center whitespace-nowrap">Saved</button>
+      </div>
+
+      @if (isOwnProfile) {
+      <!-- New Post Form -->
+      <div class="widget-profile-container mt-5 md:mx-0 p-5">
+        <h1 class="heading-primary mb-4">Share your thoughts</h1>
+
+        <form [formGroup]="postForm" (ngSubmit)="createPost()" class="flex flex-col w-full">
+          <!-- Header with user avatar -->
+          <div class="flex flex-1 items-center gap-3 mb-2">
+            @if (user.imageUrl != null ) {
+            <img [src]="user.imageUrl" alt="" [title]="user.firstName" class="size-8 md:size-10 rounded-full object-cover" />
+            } @else {
+            <img src="https://avatar.iran.liara.run/public" alt="" srcset="" class="size-8 md:size-10 rounded-full object-cover" />
+            }
+            <textarea
+              rows="1"
+              type="text"
+              formControlName="content"
+              placeholder="What's on your mind?"
+              (input)="autoGrow($event)"
+              class="w-full focus:outline-none bg-gray-900 p-5 rounded-xl text-sm text-white font-medium rouded-full min-h-[60px] max-h-[300px] transition-all duration-200 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800/30 [&::-webkit-scrollbar-thumb]:bg-gray-600 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500"
+            ></textarea>
+          </div>
+
+          @if (postMedia) {
+          <div class="mb-4">
+            <div class="relative">
+              <img [src]="getMediaPreviewUrl()" class="w-full max-h-[200px] md:max-h-[300px] object-cover rounded-lg" />
+              <button type="button" (click)="clearPostMedia()" class="absolute top-2 right-2 bg-gray-900/80 p-1.5 rounded-full hover:bg-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 md:size-5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          }
+          <!-- Action Bar -->
+          <div class="flex items-center justify-end pt-3 gap-3 md:gap-5">
+            <label class="flex items-center justify-center h-10 md:h-12 cursor-pointer px-3 md:px-4 rounded-xl hover:bg-gray-800/50 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 md:size-6 text-green-500">
+                <path
+                  fill-rule="evenodd"
+                  d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+              <span class="text-caption hidden md:inline ml-2">Photo</span>
+              <input #postFileInput type="file" class="hidden" accept="image/*" (change)="onPostMediaSelect($event)" />
+            </label>
+            <button type="submit" [disabled]="!postForm.valid" class="btn-primary btn h-10 md:h-12 w-24 md:w-28 px-4 md:px-8 hover:bg-blue-400 transition-colors">
+              <span class="text-caption bg-white">Post</span>
+            </button>
+          </div>
+        </form>
+      </div>
+      }
+
+      <!-- Posts Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5 xl:mt-10">
+        <!-- Post Card -->
+        @for (post of userPosts; track $index) {
+        <div class="widget-profile-container p-5 lg:p-10">
+          <div class="flex flex-col gap-4">
+            <!-- Post Header -->
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                @if (user.imageUrl != null) {
+                <img [src]="user.imageUrl" [alt]="user.firstName" class="size-10 rounded-full" />
+                } @else {
+                <img src="https://avatar.iran.liara.run/public" class="size-10 rounded-full" />
+                }
+                <div>
+                  <h3 class="heading-tertiary">{{ user.firstName }} {{ user.lastName }}</h3>
+                  <span class="text-caption">{{ post.createdAt | timeAgo }}</span>
+                </div>
+              </div>
+              <button class="text-gray-400 hover:text-white transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                  <path fill-rule="evenodd" d="M4.5 12a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" clip-rule="evenodd" />
+                </svg>
+              </button>
+            </div>
+
+            <!-- Post Content -->
+            <p class="text-body whitespace-pre-wrap">{{ post.content }}</p>
+            @if (post.mediaUrl != null ) {
+            <img [src]="post.mediaUrl" class="object-cover object-center w-full aspect-video rounded-xl" />
+            }
+            <!-- Post Actions -->
+            <div class="flex items-center justify-between pt-4 border-t border-gray-800">
+              <div class="flex items-center gap-6">
+                <button class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-gray-400">
+                    <path
+                      d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"
+                    />
+                  </svg>
+                  <span class="text-caption">{{ post.likesCount }}</span>
+                </button>
+              </div>
+              <button class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-gray-400">
+                  <path
+                    fill-rule="evenodd"
+                    d="M15.75 4.5a3 3 0 1 1 .825 2.066l-8.421 4.679a3.002 3.002 0 0 1 0 1.51l8.421 4.679a3 3 0 1 1-.729 1.31l-8.421-4.678a3 3 0 1 1 0-4.132l8.421-4.679a3 3 0 0 1-.096-.755Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-caption">Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-span-1 md:col-span-2 xl:col-span-2 widget-profile-container">
+      <h2 class="heading-secondary mb-6">Trending Topics</h2>
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span class="text-caption">#</span>
+          <span class="text-body">RealEstate</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-caption">#</span>
+          <span class="text-body">Architecture</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-caption">#</span>
+          <span class="text-body">InteriorDesign</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div *ngIf="isEditModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 relative rounded-xl p-10 w-2/5">
+    <div class="flex flex-col font-inter max-w-3xl">
+      <!-- Header -->
+      <div class="flex gap-2 items-center mb-10 w-full">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 text-blue-600">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+          />
+        </svg>
+        <h3 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white">Personal Information Settings</h3>
+      </div>
+
+      <!-- Form -->
+      <form [formGroup]="profileForm" (ngSubmit)="saveChanges()" class="gap-10 flex w-full items-center flex-col justify-center">
+        <div id="inputs" class="w-full mb-5">
+          <!-- Bio -->
+          <div class="mb-5">
+            <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="bio">Bio</label>
+            <textarea
+              id="bio"
+              formControlName="bio"
+              placeholder="Your bio"
+              class="block custom-scrollbar w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <!-- Location -->
+          <div class="mb-5">
+            <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="location"> Location </label>
+            <input
+              type="text"
+              id="location"
+              formControlName="location"
+              placeholder="Your location"
+              class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            />
+          </div>
+
+          <!-- Website -->
+          <div class="mb-5">
+            <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="website"> Website </label>
+            <input
+              type="text"
+              id="website"
+              formControlName="website"
+              placeholder="Your website"
+              class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            />
+          </div>
+
+          <!-- Occupation -->
+          <div class="mb-5">
+            <label class="mb-3 block text-sm font-bold text-transparent bg-clip-text bg-gray-600" for="occupation"> Occupation </label>
+            <input
+              type="text"
+              id="occupation"
+              formControlName="occupation"
+              placeholder="Your occupation"
+              class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+            />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="bg-blue-500 rounded-xl py-4 px-4 flex w-full items-center justify-center">
+          <span class="bg-clip-text text-transparent text-sm font-bold bg-white">Save Changes</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- Close Button -->
+    <button class="absolute top-3 right-3 text-gray-600 rounded-full p-3 hover:text-red-600 transition-all duration-200" (click)="closeEditModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Success Toast -->
+<div *ngIf="updateSuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <div class="flex items-center justify-center bg-emerald-500 w-14">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+      />
+    </svg>
+  </div>
+  <div class="px-4 py-2 -mx-3">
+    <div class="mx-3">
+      <span class="font-semibold text-emerald-500">Success</span>
+      <p class="text-sm text-slate-300">Profile updated successfully!</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,197 @@
+<section id="dashboard" class="relative items-center flex w-full bg-gray-950 font-inter h-screen">
+  <div class="mx-auto max-w-screen-xl">
+    <!-- TEXT -->
+    <div class="mx-auto max-w-xl text-center mb-20">
+      <h1 class="inline-flex font-extrabold text-4xl md:text-4xl bg-clip-text text-transparent bg-white">Create Account</h1>
+      <p class="mt-4 text-gray-500">Create your account and access exclusive features. Explore a world of possibilities in real estate!</p>
+    </div>
+    <!--FORM -->
+    <div class="flex mt-10 mb-5">
+      <form (ngSubmit)="onRegister()" enctype="multipart/form-data" class="relative w-full">
+        <!-- NAME -->
+        <div class="flex items-center gap-5 mb-5">
+          <label class="sr-only" for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            [(ngModel)]="user.firstName"
+            required
+            class="flex-1 rounded-xl text-slate-300 p-4 pe-12 text-sm border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 focus:outline-none focus:ring-0"
+            placeholder="First Name"
+          />
+
+          <label class="sr-only" for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            [(ngModel)]="user.lastName"
+            required
+            class="flex-1 rounded-xl text-slate-300 p-4 pe-12 text-sm border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 focus:outline-none focus:ring-0"
+            placeholder="Last Name"
+          />
+        </div>
+        <!-- ACCOUNT -->
+        <div class="flex items-center gap-5 mb-5">
+          <label for="email" class="sr-only">Email</label>
+          <div class="relative flex-1">
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="user.email"
+              class="w-full rounded-xl text-slate-300 border-gray-200 p-4 pe-12 text-sm border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 focus:outline-none focus:ring-0 invalid:border-red-500 invalid:text-red-600"
+              placeholder="Enter email"
+            />
+            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
+            </span>
+          </div>
+
+          <label for="password" class="sr-only">Password</label>
+          <div class="relative flex-1">
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="user.password"
+              required
+              class="w-full rounded-xl text-slate-300 p-4 pe-12 text-sm border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 focus:outline-none focus:ring-0"
+              placeholder="Enter password"
+            />
+            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <!--SUBMIT-->
+        <div class="justify-between flex items-center gap-5 mb-5">
+          <p class="text-sm text-gray-500">
+            Already have an account?
+            <a class="cursor-pointer text-blue-600" (click)="signInRedirect()">Sign In</a>
+          </p>
+          <button type="submit" class="inline-block bg-blue-600 hover:bg-blue-400 transition-all duration-200 px-5 py-3 text-sm font-medium text-white rounded-xl">Sign up</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="grid grid-cols-4 gap-5">
+      <div class="col-span-1 text-slate-300 border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 rounded-xl aspect-square">
+        <button class="w-full h-full p-5">
+          <div class="mb-3">
+            <svg class="w-7 h-7" viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+              <path
+                d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"
+                fill="#4285F4"
+              />
+              <path
+                d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"
+                fill="#34A853"
+              />
+              <path
+                d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782"
+                fill="#FBBC05"
+              />
+              <path
+                d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
+                fill="#EB4335"
+              />
+            </svg>
+          </div>
+          <div class="text-sm text-start">
+            <h5>Sign Up</h5>
+            <h5 class="font-semibold">with Google</h5>
+          </div>
+        </button>
+      </div>
+      <div class="col-span-1 text-slate-300 border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 rounded-xl aspect-square">
+        <button class="w-full h-full p-5">
+          <div class="mb-3">
+            <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="17" y="17" width="10" height="10" fill="#FEBA08" />
+              <rect x="5" y="17" width="10" height="10" fill="#05A6F0" />
+              <rect x="17" y="5" width="10" height="10" fill="#80BC06" />
+              <rect x="5" y="5" width="10" height="10" fill="#F25325" />
+            </svg>
+          </div>
+          <div class="text-sm text-start">
+            <h5>Sign Up</h5>
+            <h5 class="font-semibold">with Microsoft</h5>
+          </div>
+        </button>
+      </div>
+      <div class="col-span-2 text-slate-300 border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 rounded-xl">
+        <button class="w-full h-full p-5">
+          <div class="mb-3">
+            <svg fill="#0866FF" class="w-8 h-8" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <g id="XMLID_834_">
+                  <path
+                    id="XMLID_835_"
+                    d="M81.703,165.106h33.981V305c0,2.762,2.238,5,5,5h57.616c2.762,0,5-2.238,5-5V165.765h39.064 c2.54,0,4.677-1.906,4.967-4.429l5.933-51.502c0.163-1.417-0.286-2.836-1.234-3.899c-0.949-1.064-2.307-1.673-3.732-1.673h-44.996 V71.978c0-9.732,5.24-14.667,15.576-14.667c1.473,0,29.42,0,29.42,0c2.762,0,5-2.239,5-5V5.037c0-2.762-2.238-5-5-5h-40.545 C187.467,0.023,186.832,0,185.896,0c-7.035,0-31.488,1.381-50.804,19.151c-21.402,19.692-18.427,43.27-17.716,47.358v37.752H81.703 c-2.762,0-5,2.238-5,5v50.844C76.703,162.867,78.941,165.106,81.703,165.106z"
+                  ></path>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="text-sm text-start">
+            <h5>Sign Up</h5>
+            <h5 class="font-semibold">with Facebook</h5>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL  *ngIf="loginSuccess" -->
+  <div *ngIf="registerSuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+    <div class="flex items-center justify-center bg-emerald-500 w-14">
+      <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-emerald-500">Success</span>
+        <p class="text-sm text-slate-300">Redirecting login page...</p>
+      </div>
+    </div>
+  </div>
+  <!--ERROR MODAL *ngIf="loginFailure" -->
+  <div *ngIf="registerFailure" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+    <div class="flex items-center justify-center w-14 bg-red-500">
+      <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-red-500">Error</span>
+        <p class="text-sm text-slate-300">{{ errorMessage }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<router-outlet></router-outlet>

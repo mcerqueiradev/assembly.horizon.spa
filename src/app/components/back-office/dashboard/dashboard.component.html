@@ -1,0 +1,575 @@
+<section id="dashboard" class="relative flex flex-col w-svw bg-gray-950 font-inter min-h-screen">
+  <!-- SIDEBAR -->
+  <app-sidebar [loggedUserDetails]="loggedUserDetails"></app-sidebar>
+  <!-- MAIN CONTENT -->
+  <main class="ml-0 lg:ml-64 p-5 flex-1">
+    <section class="hidden md:flex justify-between items-center mb-10 font-inter">
+      <div>
+        <h1 class="inline-flex font-extrabold text-4xl md:text-4xl bg-clip-text text-transparent bg-white">Dashboard</h1>
+        <h6 class="text-caption">{{ date | date : 'EEEE, dd MMMM yyyy' }}</h6>
+      </div>
+      <div>
+        <ul class="flex gap-5">
+          <li>
+            <button
+              class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+              </svg>
+            </button>
+          </li>
+          <li>
+            <button
+              class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                <path
+                  fill-rule="evenodd"
+                  d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </li>
+          <li class="relative">
+            <button
+              (click)="toggleNotifications($event)"
+              class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                />
+              </svg>
+              <span *ngIf="notifications.length > 0" class="absolute flex h-3 w-3 -top-1 -right-1">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+              </span>
+            </button>
+            <!-- Notifications Dropdown -->
+            <app-notifications-list [notifications]="notifications" [showNotifications]="showNotifications" (closeNotifications)="closeNotificationsPanel()"></app-notifications-list>
+          </li>
+          <li>
+            <button id="user" type="button" class="group flex shrink-0 items-center rounded-lg transition" (click)="navigateToProfile(loggedUserDetails!.id)">
+              <span class="sr-only">Menu</span>
+              @if(loggedUserDetails?.imageUrl != null) {
+              <img [src]="loggedUserDetails?.imageUrl" class="rounded-full w-9 h-9 object-cover mr-2" alt="Profile Picture" />
+              } @else {
+              <img alt="" src="https://avatar.iran.liara.run/public/" class="h-10 w-10 rounded-full object-cover" />
+              }
+              <p class="ms-2 text-left sm:block text-xs">
+                <span class="bg-clip-text bg-white text-transparent text-xs font-bold"> {{ loggedUserDetails?.firstName }} {{ loggedUserDetails?.lastName }} </span>
+              </p>
+
+              <svg xmlns="http://www.w3.org/2000/svg" class="ms-3 hidden h-5 w-5 text-neutral-600 transition group-hover:text-gray-700 sm:block" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+              </svg>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Add mobile navigation -->
+    <section class="md:hidden fixed top-0 left-0 right-0 w-svw bg-gray-950 z-50 py-4 px-5 h-20 flex items-center justify-between">
+      <button
+        class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+          <path
+            fill-rule="evenodd"
+            d="M2 3.75A.75.75 0 0 1 2.75 3h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 3.75ZM2 8a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 8Zm0 4.25a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+      <ul class="flex justify-end gap-3">
+        <li class="">
+          <button
+            class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+              <path
+                fill-rule="evenodd"
+                d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+              <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+            </svg>
+          </button>
+        </li>
+
+        <li class="static md:relative">
+          <button
+            (click)="toggleNotifications($event)"
+            class="relative supports-backdrop-blur:bg-white/95 flex h-10 w-10 items-center justify-center rounded-xl bg-gray-900 text-neutral-300 group hover:text-blue-400 transition-colors duration-200"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+              />
+            </svg>
+            <span *ngIf="notifications.length > 0" class="absolute flex h-3 w-3 -top-1 -right-1">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+            </span>
+          </button>
+          <!-- Notifications Dropdown -->
+          <app-notifications-list [notifications]="notifications" [showNotifications]="showNotifications" (closeNotifications)="closeNotificationsPanel()"></app-notifications-list>
+        </li>
+        <li>
+          <button id="user" type="button" class="group flex shrink-0 items-center rounded-lg transition" (click)="navigateToProfile(loggedUserDetails!.id)">
+            <span class="sr-only">Menu</span>
+            @if(loggedUserDetails?.imageUrl != null) {
+            <img [src]="loggedUserDetails?.imageUrl" class="rounded-xl w-10 h-10 object-cover mr-2" alt="Profile Picture" />
+            } @else {
+            <img alt="" src="https://avatar.iran.liara.run/public/" class="h-10 w-10 rounded-full object-cover" />
+            }
+          </button>
+        </li>
+      </ul>
+    </section>
+
+    <section *ngIf="showDashboardContent">
+      <div class="sm:hidden mt-20 mb-5">
+        <div class="w-28 flex items-center mb-3">
+          <app-logo class="h-full w-auto"></app-logo>
+        </div>
+
+        <h1 class="inline-flex font-extrabold text-4xl md:text-4xl bg-clip-text text-transparent bg-white">Dashboard</h1>
+        <h6 class="text-caption">{{ date | date : 'EEEE, dd MMMM yyyy' }}</h6>
+      </div>
+
+      <div class="grid grid-cols-6 gap-5 mt-5">
+        <!-- OVERALL INFORMATION -->
+        <div class="col-span-6 lg:col-span-4 text-neutral-300 widget-container">
+          <!-- Header Section -->
+          <div class="flex justify-between items-center mb-8">
+            <div>
+              <h3 class="heading-primary">Portfolio Overview</h3>
+              <p class="text-body mt-1">Performance metrics for your properties</p>
+            </div>
+            <div class="flex items-center gap-2 bg-gray-900/50 rounded-lg p-2">
+              <span class="text-xs text-neutral-400">Last 30 days</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-neutral-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Main Metrics Grid -->
+          <div class="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2">
+            <!-- Total Property Value -->
+            <div class="bg-gray-900/50 rounded-xl p-6 flex flex-col justify-between h-full">
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex flex-col">
+                  <p class="text-body mb-1">Total Portfolio Value</p>
+                </div>
+                <div class="flex items-center gap-1 bg-green-500/20 text-green-400 px-2 py-1 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                    <path
+                      fill-rule="evenodd"
+                      d="M12.577 4.878a.75.75 0 0 1 .919-.53l4.78 1.281a.75.75 0 0 1 .531.919l-1.281 4.78a.75.75 0 0 1-1.449-.387l.81-3.022a19.407 19.407 0 0 0-5.594 5.203.75.75 0 0 1-1.139.093L7 10.06l-4.72 4.72a.75.75 0 0 1-1.06-1.061l5.25-5.25a.75.75 0 0 1 1.06 0l3.074 3.073a20.923 20.923 0 0 1 5.545-4.931l-3.042.815a.75.75 0 0 1-.919-.53Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-xs font-medium">+8.2%</span>
+                </div>
+              </div>
+              <h4 class="text-2xl font-bold text-white self-start">{{ totalPrice() }}</h4>
+            </div>
+
+            <!-- Active Listings -->
+            <div class="bg-gray-900/50 rounded-xl p-6">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <p class="text-body mb-1">Active Listings</p>
+                  <h4 class="text-2xl font-bold text-white">{{ properties.length }}</h4>
+                </div>
+                <div class="flex items-center gap-1 bg-blue-500/20 text-blue-400 px-2 py-1 rounded-lg">
+                  <span class="text-xs font-medium">12 Featured</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="flex-1 bg-gray-800 rounded-full h-2">
+                  <div class="bg-blue-500 h-2 rounded-full" style="width: 65%"></div>
+                </div>
+                <span class="text-xs text-neutral-400">65% Occupied</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Secondary Metrics -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Monthly Revenue -->
+            <div class="bg-gradient-to-br from-blue-600/20 to-blue-700/20 rounded-xl p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="p-2 bg-blue-500/20 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-blue-500">
+                    <path
+                      d="M10.75 10.818v2.614A3.13 3.13 0 0 0 11.888 13c.482-.315.612-.648.612-.875 0-.227-.13-.56-.612-.875a3.13 3.13 0 0 0-1.138-.432ZM8.33 8.62c.053.055.115.11.184.164.208.16.46.284.736.363V6.603a2.45 2.45 0 0 0-.35.13c-.14.065-.27.143-.386.233-.377.292-.514.627-.514.909 0 .184.058.39.202.592.037.051.08.102.128.152Z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-6a.75.75 0 0 1 .75.75v.316a3.78 3.78 0 0 1 1.653.713c.426.33.744.74.925 1.2a.75.75 0 0 1-1.395.55 1.35 1.35 0 0 0-.447-.563 2.187 2.187 0 0 0-.736-.363V9.3c.698.093 1.383.32 1.959.696.787.514 1.29 1.27 1.29 2.13 0 .86-.504 1.616-1.29 2.13-.576.377-1.261.603-1.96.696v.299a.75.75 0 1 1-1.5 0v-.3c-.697-.092-1.382-.318-1.958-.695-.482-.315-.857-.717-1.078-1.188a.75.75 0 1 1 1.359-.636c.08.173.245.376.54.569.313.205.706.353 1.138.432v-2.748a3.782 3.782 0 0 1-1.653-.713C6.9 9.433 6.5 8.681 6.5 7.875c0-.805.4-1.558 1.097-2.096a3.78 3.78 0 0 1 1.653-.713V4.75A.75.75 0 0 1 10 4Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-400">Monthly Revenue</p>
+                  <p class="text-lg font-bold text-white">$128.5k</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="text-green-400">↑ 12.5%</span>
+                <span class="text-neutral-400">from last month</span>
+              </div>
+            </div>
+
+            <!-- Occupancy Rate -->
+            <div class="bg-gradient-to-br from-purple-600/20 to-purple-700/20 rounded-xl p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="p-2 bg-purple-500/20 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-purple-500">
+                    <path
+                      d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5ZM10 8a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0v-1.5h-1.5a.75.75 0 0 1 0-1.5h1.5v-1.5A.75.75 0 0 1 10 8Z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-400">New Listings</p>
+                  <p class="text-lg font-bold text-white">8</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="text-green-400">↑ 4</span>
+                <span class="text-neutral-400">this week</span>
+              </div>
+            </div>
+
+            <!-- ROI -->
+            <div class="bg-gradient-to-br from-orange-600/20 to-orange-700/20 rounded-xl p-4">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="p-2 bg-orange-500/20 rounded-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-orange-500">
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-sm text-neutral-400">Avg. ROI</p>
+                  <p class="text-lg font-bold text-white">18.2%</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 text-xs">
+                <span class="text-green-400">↑ 2.4%</span>
+                <span class="text-neutral-400">vs. last year</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-6 lg:col-span-2 text-neutral-300 bg-gray-800/30 rounded-3xl p-8 flex flex-col h-full">
+          <!-- Header Section -->
+          <div class="mb-5">
+            <div class="flex items-center gap-5 mb-5">
+              <div class="section-marker"></div>
+              <h3 class="section-title">New Property Listing</h3>
+            </div>
+            <p class="section-description">Expand your real estate portfolio by listing your property. Connect with verified buyers and maximize your property's exposure in the market.</p>
+          </div>
+
+          <!-- Stats Section -->
+          <div class="stats-container grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+            <div class="stat-card">
+              <p class="stat-label">Active Listings</p>
+              <p class="stat-value">{{ properties.length }}</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-label">Monthly Views</p>
+              <p class="stat-value">12.5k</p>
+            </div>
+            <div class="stat-card">
+              <p class="stat-label">Avg. Time to Sell</p>
+              <p class="stat-value">45 days</p>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <div class="mt-auto">
+            <button
+              (click)="navigateToAddProperty()"
+              class="group relative w-full overflow-hidden bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 rounded-xl p-6 transition-all duration-300"
+            >
+              <div class="relative z-10">
+                <div class="flex items-center justify-between">
+                  <div class="text-start">
+                    <h2 class="heading-secondary mb-1">List Your Property</h2>
+                    <p class="text-body bg-white">Get started in minutes</p>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <span class="text-body bg-white">Start now</span>
+                    <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 text-white transform group-hover:translate-x-0.5 transition-transform"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <!-- Features List -->
+            <div class="flex items-center justify-center lg:justify-between mt-5 flex-wrap gap-5">
+              <div class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                <span class="text-caption">Free listing</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                <span class="text-caption">Verified buyers</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                <span class="text-caption">24/7 Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-5 gap-5 mt-5">
+        <!-- TASKS -->
+        <div class="col-span-5 sm:col-span-3 text-neutral-300 supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 flex flex-col h-full">
+          <div class="flex-grow mb-5">
+            <h1 class="inline-flex font-extrabold text-2xl bg-clip-text text-transparent bg-white pb-2">Next Appointments</h1>
+            <h6 class="text-sm">{{ date | date : 'MMMM dd' }}</h6>
+          </div>
+
+          <ul
+            *ngIf="hasAppointments()"
+            class="max-h-60 overflow-y-auto [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800/30 [&::-webkit-scrollbar-thumb]:bg-gray-600 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500"
+          >
+            <li class="flex gap-6 p-4 hover:bg-gray-950/50 transition-colors rounded-lg" *ngFor="let visit of propertyVisitResponse.visits">
+              <!-- Date Badge -->
+              <div class="min-w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex flex-col items-center justify-center text-white">
+                <span class="text-2xl font-bold">{{ visit.visitDate | date : 'dd' }}</span>
+                <span class="text-sm font-medium">{{ visit.visitDate | date : 'MMM' }}</span>
+              </div>
+
+              <!-- Content -->
+              <div class="flex flex-col justify-center">
+                <!-- Time Badge -->
+                <div class="flex gap-2 items-center bg-blue-900/40 text-blue-200 px-3 py-1.5 rounded-full w-fit mb-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm7.75-4.25a.75.75 0 0 0-1.5 0V8c0 .414.336.75.75.75h3.25a.75.75 0 0 0 0-1.5h-2.5v-3.5Z" clip-rule="evenodd" />
+                  </svg>
+                  <span class="text-xs">{{ visit.timeSlot | appTimeSlot }}</span>
+                </div>
+
+                <!-- Property Title -->
+                <a href="#" class="text-lg font-semibold text-white hover:text-blue-300 transition-colors line-clamp-1">
+                  {{ visit.propertyTitle }}
+                </a>
+              </div>
+            </li>
+          </ul>
+
+          <div *ngIf="!hasAppointments()" class="flex flex-col items-center justify-center py-8 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <p class="text-body mb-2">No upcoming appointments.</p>
+            <button class="text-blue-400 hover:text-blue-300 text-sm">Schedule a Visit</button>
+          </div>
+        </div>
+
+        @if (favorites.length != 0) {
+        <!-- FAVORITES SECTION -->
+        <div class="col-span-5 sm:col-span-3 text-neutral-300 supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h1 class="inline-flex font-extrabold text-2xl bg-clip-text text-transparent bg-white">Favorites</h1>
+              <p class="text-sm text-gray-400">{{ favorites.length }} saved properties</p>
+            </div>
+
+            <button class="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-2">
+              View All
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                <path
+                  fill-rule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            *ngIf="hasFavorites()"
+            class="grid grid-cols-2 gap-4 max-h-[500px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-800/30 [&::-webkit-scrollbar-thumb]:bg-gray-600 hover:[&::-webkit-scrollbar-thumb]:bg-gray-500"
+          >
+            <div class="group relative" *ngFor="let favorite of favorites">
+              <!-- Property Card -->
+              <div class="bg-gray-950/30 rounded-xl overflow-hidden transition-all duration-300 hover:bg-gray-950/50">
+                <!-- Image Container -->
+                <div class="relative h-48 overflow-hidden">
+                  <img
+                    *ngIf="favorite.property.images && favorite.property.images.length > 0; else noImage"
+                    [src]="favorite.property.images[0].imagePath"
+                    [alt]="favorite.property.title"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                  <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                    <span class="text-lg font-bold text-white">{{ favorite.property.price | currency }}</span>
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="p-4">
+                  <h3 class="font-semibold text-white group-hover:text-blue-300 transition-colors line-clamp-1">
+                    {{ favorite.property.title }}
+                  </h3>
+
+                  <div class="flex items-center gap-2 mt-2 text-neutral-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                      <path
+                        fill-rule="evenodd"
+                        d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-sm line-clamp-1"> {{ favorite.property.city }}, {{ favorite.property.state }} </span>
+                  </div>
+
+                  <div class="flex items-center gap-5 justify-between *:bg-gray-800/50 *:rounded-full *:p-2 text-xs mt-2">
+                    <span class=""> {{ favorite.property.bedrooms }} beds </span>
+                    <span class=""> {{ favorite.property.bathrooms }} baths </span>
+                    <span class=""> {{ favorite.property.size }} sqft </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!hasFavorites()" class="flex flex-col items-center justify-center py-12 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+            <p class="text-body mb-2">No favorite properties yet.</p>
+            <button class="text-blue-400 hover:text-blue-300 text-sm">Browse Properties</button>
+          </div>
+        </div>
+
+        }
+        <ng-template #noImage>
+          <div class="h-48 bg-gray-800 flex items-center justify-center">
+            <span class="text-gray-400">No image available</span>
+          </div>
+        </ng-template>
+
+        <div
+          class="col-span-5 sm:col-span-2 text-neutral-300 supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 hover:bg-gray-800/40 transition-all cursor-pointer group"
+          (click)="navigateToProposals()"
+        >
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <h1 class="inline-flex font-extrabold text-2xl bg-clip-text text-transparent bg-white pb-2">Deal Proposals</h1>
+              <h6 class="text-sm text-gray-400">10 offers in total</h6>
+            </div>
+            <svg class="w-6 h-6 text-blue-500 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </div>
+
+          <div class="flex items-center justify-between mt-4">
+            <button class="text-sm text-blue-400 hover:text-blue-300 inline-flex items-center gap-2 font-medium">
+              View All Proposals
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden grid-cols-6 gap-5 mt-5">
+        <div class="col-span-6 sm:col-span-6 text-neutral-300 supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10">
+          <div class="flex justify-between">
+            <div>
+              <h1 class="inline-flex font-extrabold text-2xl bg-clip-text text-transparent bg-white pb-2">My Units</h1>
+              <h6 class="text-sm text-white">
+                Mateus, you have <span class="text-gray-400">{{ properties.length }}</span> active units.
+              </h6>
+            </div>
+            <div><!-- PUT SEARCH AND FILTER --></div>
+          </div>
+
+          <ul class="grid grid-cols-1 sm:grid-cols-1 lg:2 xl:grid-cols-3 gap-5 mt-10">
+            @for (property of properties.slice().reverse(); track $index) {
+            <li id="property" class="col-span-1 cursor-pointer" (click)="navigateToProperty(property.id!)">
+              <div id="property_image" class="bg-gray-900 rounded-xl overflow-hidden aspect-video mb-5">
+                <img *ngIf="property.images && property.images.length > 0; else noImage" [src]="property.images[0].imagePath" alt="Imagem da Propriedade" class="w-full h-full object-cover" />
+              </div>
+
+              <ng-template #noImage>
+                <img src="" alt="Imagem não disponível" class="w-full h-full object-cover" />
+              </ng-template>
+
+              <div id="property_infos">
+                <div class="flex items-center justify-between mb-5 gap-5">
+                  <h1 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white line-clamp-1 text-balance">{{ property.title }}</h1>
+                  <div class="flex items-center gap-2 bg-gray-800 rounded-full p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-3">
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm3.844-8.791a.75.75 0 0 0-1.188-.918l-3.7 4.79-1.649-1.833a.75.75 0 1 0-1.114 1.004l2.25 2.5a.75.75 0 0 0 1.15-.043l4.25-5.5Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span class="text-xs font-medium"> {{ property.type }}</span>
+                  </div>
+                </div>
+                <div>
+                  <ul class="flex items-center gap-5 justify-between *:bg-gray-800/50 *:rounded-full *:p-2 text-xs">
+                    <li>{{ property.size }} sqft</li>
+                    <li>{{ property.bedrooms }} Bedrooms</li>
+                    <li>{{ property.bathrooms }} Bathrooms</li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+  <router-outlet></router-outlet>
+</section>

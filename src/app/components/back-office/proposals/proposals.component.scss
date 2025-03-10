@@ -1,0 +1,104 @@
+// Glass effect utilities
+.glass-card {
+  @apply bg-white/5 backdrop-blur-lg rounded-3xl p-8 border border-white/10;
+}
+
+// Stats cards
+.stats-card {
+  @apply flex items-start gap-4 p-6 bg-white/5 rounded-2xl transition-all duration-300 hover:bg-white/10;
+}
+
+.stats-icon {
+  @apply p-4 rounded-xl text-xl;
+}
+
+.stats-content {
+  @apply flex flex-col;
+}
+
+.stats-title {
+  @apply text-gray-400 text-sm font-medium;
+}
+
+.stats-value {
+  @apply text-3xl font-bold text-white mt-1;
+}
+
+.stats-subtitle {
+  @apply text-sm text-gray-400 flex items-center gap-2 mt-1;
+}
+
+// Proposal cards
+.proposal-card {
+  @apply bg-white/5 rounded-xl overflow-hidden transition-all duration-300 hover:bg-white/10;
+}
+
+.proposal-image {
+  @apply relative h-48;
+}
+
+.proposal-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex items-end;
+}
+
+.proposal-title {
+  @apply text-white text-lg font-bold;
+}
+
+.proposal-badges {
+  @apply flex justify-between items-center p-4;
+}
+
+.proposal-details {
+  @apply grid grid-cols-2 gap-4 p-4;
+}
+
+.detail-item {
+  @apply flex items-start gap-2;
+}
+
+.detail-label {
+  @apply text-gray-400 text-xs;
+}
+
+.detail-value {
+  @apply text-white font-medium;
+}
+
+// Buttons
+.btn-primary {
+  @apply px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors flex items-center;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-gray-700 text-gray-300 rounded-xl hover:bg-gray-600 transition-colors flex items-center;
+}
+
+// Activity feed
+.activity-feed {
+  @apply space-y-4;
+}
+
+.activity-item {
+  @apply flex items-start gap-3 p-4 bg-white/5 rounded-xl;
+}
+
+.activity-indicator {
+  @apply w-2 h-2 rounded-full mt-2;
+}
+
+.activity-content {
+  @apply flex-1;
+}
+
+.activity-date {
+  @apply text-gray-400 text-sm;
+}
+
+.activity-title {
+  @apply text-white mt-1;
+}
+
+.activity-subtitle {
+  @apply text-gray-400 text-sm mt-1;
+}

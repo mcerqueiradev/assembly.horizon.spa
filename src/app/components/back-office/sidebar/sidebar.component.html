@@ -1,0 +1,123 @@
+<aside class="font-inter fixed h-screen w-64 p-10 flex-col justify-between gap-5 bg-gray-800/30 hidden lg:flex">
+  <div class="w-full aspect-video flex items-center justify-center mb-10">
+    <a class="contents" href="#">
+      <div class="w-1/2">
+        <svg class="h-auto w-full fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1453 208">
+          <path
+            fill-rule="evenodd"
+            d="M1421.000,208.000 L1320.000,55.000 L1320.000,208.000 L1287.000,208.000 L1287.000,1.000 L1318.000,1.000 L1420.000,154.000 L1420.000,1.000 L1453.000,1.000 L1453.000,208.000 L1421.000,208.000 ZM1151.476,207.990 C1094.568,207.990 1048.403,165.190 1048.403,104.339 C1048.403,43.780 1094.568,0.980 1151.476,0.980 C1208.964,0.980 1254.548,43.780 1254.548,104.339 C1254.548,165.190 1208.964,207.990 1151.476,207.990 ZM1151.476,30.095 C1111.408,30.095 1082.373,58.628 1082.373,104.339 C1082.373,150.050 1111.408,179.166 1151.476,179.166 C1191.544,179.166 1220.578,150.050 1220.578,104.339 C1220.578,58.628 1191.544,30.095 1151.476,30.095 ZM890.000,180.000 L984.000,32.000 L891.000,32.000 L891.000,1.000 L1023.000,1.000 L1023.000,30.000 L929.000,177.000 L1023.000,177.000 L1023.000,208.000 L890.000,208.000 L890.000,180.000 ZM821.000,1.000 L854.000,1.000 L854.000,208.000 L821.000,208.000 L821.000,1.000 ZM743.000,208.000 L695.000,125.000 L670.000,125.000 L670.000,208.000 L637.000,208.000 L637.000,1.000 L707.000,1.000 C754.907,1.000 778.424,31.260 778.424,64.160 C778.424,88.035 764.970,113.557 731.000,122.000 L783.000,208.000 L743.000,208.000 ZM745.000,64.000 C745.000,43.619 732.841,30.000 707.000,30.000 L670.000,30.000 L670.000,98.000 L707.000,98.000 C732.841,98.000 745.000,84.090 745.000,64.000 ZM501.745,207.990 C444.837,207.990 398.672,165.190 398.672,104.339 C398.672,43.780 444.837,0.980 501.745,0.980 C559.233,0.980 604.817,43.780 604.817,104.339 C604.817,165.190 559.233,207.990 501.745,207.990 ZM501.745,30.095 C461.677,30.095 432.643,58.628 432.643,104.339 C432.643,150.050 461.677,179.166 501.745,179.166 C541.813,179.166 570.847,150.050 570.847,104.339 C570.847,58.628 541.813,30.095 501.745,30.095 ZM333.000,118.000 L33.000,118.000 L33.000,208.000 L-0.000,208.000 L-0.000,1.000 L33.000,1.000 L33.000,91.000 L333.000,91.000 L333.000,1.000 L366.000,1.000 L366.000,208.000 L333.000,208.000 L333.000,118.000 Z"
+          />
+        </svg>
+      </div>
+    </a>
+  </div>
+  <nav class="w-full h-full">
+    <ul class="flex flex-col items-center justify-between h-2/3">
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a href="back-office/dashboard" class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+            <path
+              fill-rule="evenodd"
+              d="M4.25 2A2.25 2.25 0 0 0 2 4.25v2.5A2.25 2.25 0 0 0 4.25 9h2.5A2.25 2.25 0 0 0 9 6.75v-2.5A2.25 2.25 0 0 0 6.75 2h-2.5Zm0 9A2.25 2.25 0 0 0 2 13.25v2.5A2.25 2.25 0 0 0 4.25 18h2.5A2.25 2.25 0 0 0 9 15.75v-2.5A2.25 2.25 0 0 0 6.75 11h-2.5Zm9-9A2.25 2.25 0 0 0 11 4.25v2.5A2.25 2.25 0 0 0 13.25 9h2.5A2.25 2.25 0 0 0 18 6.75v-2.5A2.25 2.25 0 0 0 15.75 2h-2.5Zm0 9A2.25 2.25 0 0 0 11 13.25v2.5A2.25 2.25 0 0 0 13.25 18h2.5A2.25 2.25 0 0 0 18 15.75v-2.5A2.25 2.25 0 0 0 15.75 11h-2.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="whitespace-nowrap text-sm font-medium">Dashboard</span>
+        </a>
+      </li>
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400 cursor-pointer" (click)="navigateToTransactions()">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+          </svg>
+
+          <span class="whitespace-nowrap text-sm font-medium">Transactions</span>
+        </a>
+      </li>
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a (click)="navigateToProperties()" class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+            <path
+              fill-rule="evenodd"
+              d="M4 16.5v-13h-.25a.75.75 0 0 1 0-1.5h12.5a.75.75 0 0 1 0 1.5H16v13h.25a.75.75 0 0 1 0 1.5h-3.5a.75.75 0 0 1-.75-.75v-2.5a.75.75 0 0 0-.75-.75h-2.5a.75.75 0 0 0-.75.75v2.5a.75.75 0 0 1-.75.75h-3.5a.75.75 0 0 1 0-1.5H4Zm3-11a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 9a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1ZM11 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm.5 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="text-sm font-medium">Properties</span>
+        </a>
+      </li>
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400 cursor-pointer" (click)="navigateToContracts()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-4">
+            <path
+              d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z"
+            />
+            <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+          </svg>
+
+          <span class="text-sm font-medium">Contracts</span>
+        </a>
+      </li>
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a href="" class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+            <path
+              fill-rule="evenodd"
+              d="M1 11.27c0-.246.033-.492.099-.73l1.523-5.521A2.75 2.75 0 0 1 5.273 3h9.454a2.75 2.75 0 0 1 2.651 2.019l1.523 5.52c.066.239.099.485.099.732V15a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3.73Zm3.068-5.852A1.25 1.25 0 0 1 5.273 4.5h9.454a1.25 1.25 0 0 1 1.205.918l1.523 5.52c.006.02.01.041.015.062H14a1 1 0 0 0-.86.49l-.606 1.02a1 1 0 0 1-.86.49H8.236a1 1 0 0 1-.894-.553l-.448-.894A1 1 0 0 0 6 11H2.53l.015-.062 1.523-5.52Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="text-sm font-medium">Inbox</span>
+        </a>
+      </li>
+
+      @if( loggedUserDetails.access == "SystemAdministrator") {
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400 cursor-pointer" (click)="navigateToUsers()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-4">
+            <path
+              d="M7 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM14.5 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM1.615 16.428a1.224 1.224 0 0 1-.569-1.175 6.002 6.002 0 0 1 11.908 0c.058.467-.172.92-.57 1.174A9.953 9.953 0 0 1 7 18a9.953 9.953 0 0 1-5.385-1.572ZM14.5 16h-.106c.07-.297.088-.611.048-.933a7.47 7.47 0 0 0-1.588-3.755 4.502 4.502 0 0 1 5.874 2.636.818.818 0 0 1-.36.98A7.465 7.465 0 0 1 14.5 16Z"
+            />
+          </svg>
+
+          <span class="whitespace-nowrap text-sm font-medium">Users</span>
+        </a>
+      </li>
+      }
+
+      <li class="w-full flex items-center justify-center group transition-all duration-200">
+        <a class="flex w-full h-full items-center space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400 cursor-pointer" (click)="navigateToSettings()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+            <path
+              fill-rule="evenodd"
+              d="M7.84 1.804A1 1 0 0 1 8.82 1h2.36a1 1 0 0 1 .98.804l.331 1.652a6.993 6.993 0 0 1 1.929 1.115l1.598-.54a1 1 0 0 1 1.186.447l1.18 2.044a1 1 0 0 1-.205 1.251l-1.267 1.113a7.047 7.047 0 0 1 0 2.228l1.267 1.113a1 1 0 0 1 .206 1.25l-1.18 2.045a1 1 0 0 1-1.187.447l-1.598-.54a6.993 6.993 0 0 1-1.929 1.115l-.33 1.652a1 1 0 0 1-.98.804H8.82a1 1 0 0 1-.98-.804l-.331-1.652a6.993 6.993 0 0 1-1.929-1.115l-1.598.54a1 1 0 0 1-1.186-.447l-1.18-2.044a1 1 0 0 1 .205-1.251l1.267-1.114a7.05 7.05 0 0 1 0-2.227L1.821 7.773a1 1 0 0 1-.206-1.25l1.18-2.045a1 1 0 0 1 1.187-.447l1.598.54A6.992 6.992 0 0 1 7.51 3.456l.33-1.652ZM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="text-sm font-medium">Settings</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <button
+    class="w-full aspect-video flex items-center justify-center group transition-all duration-200 space-x-6 text-neutral-400 hover:text-blue-400 active:text-blue-400"
+    type="button"
+    title="Logout"
+    (click)="logOut()"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+      <path
+        fill-rule="evenodd"
+        d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z"
+        clip-rule="evenodd"
+      />
+      <path
+        fill-rule="evenodd"
+        d="M19 10a.75.75 0 0 0-.75-.75H8.704l1.048-.943a.75.75 0 1 0-1.004-1.114l-2.5 2.25a.75.75 0 0 0 0 1.114l2.5 2.25a.75.75 0 1 0 1.004-1.114l-1.048-.943h9.546A.75.75 0 0 0 19 10Z"
+        clip-rule="evenodd"
+      />
+    </svg>
+
+    <span class="text-sm font-medium">Logout</span>
+  </button>
+</aside>

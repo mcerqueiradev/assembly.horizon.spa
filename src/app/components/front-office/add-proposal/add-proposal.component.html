@@ -1,0 +1,110 @@
+<div class="flex flex-col font-inter w-full p-5 md:p-10">
+  <!-- Header Section -->
+  <div class="mb-10">
+    <h4 class="bg-clip-text text-transparent text-xs font-semibold bg-gray-300 mb-2">Make a proposal for this property.</h4>
+    <div class="flex gap-2 items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6 text-blue-600">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z"
+        />
+      </svg>
+      <h3 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white">Make Proposal</h3>
+    </div>
+  </div>
+
+  <!-- Form Section -->
+  <form [formGroup]="proposalForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="space-y-5">
+      <!-- Proposed Value Input -->
+      <div>
+        <label class="block text-caption bg-gray-500 mb-3">Proposed Value</label>
+        <input
+          type="number"
+          formControlName="proposedValue"
+          placeholder="$0.00"
+          required
+          class="font-bold w-full text-white placeholder:text-gray-400 bg-transparent text-7xl ring-0 focus:ring-0 focus:outline-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [-moz-appearance:textfield]"
+        />
+      </div>
+
+      <!-- Proposal Type -->
+      <div>
+        <label class="block text-caption bg-gray-500 mb-3">Proposal Type</label>
+        <div class="grid grid-cols-2 gap-3">
+          <div *ngFor="let type of proposalTypes">
+            <input type="radio" [id]="type.id" [value]="type.id" formControlName="type" class="hidden peer" />
+            <label
+              [for]="type.id"
+              class="flex items-center justify-center p-4 rounded-xl border border-gray-700/30 bg-gray-800/30 text-gray-300 cursor-pointer transition-all duration-200 peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:bg-blue-500/20 peer-checked:border-transparent hover:border-blue-500/50"
+            >
+              <span class="text-sm font-medium">{{ type.name }}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div>
+        <label class="block text-caption bg-gray-500 mb-3">Payment Method</label>
+        <select
+          formControlName="paymentMethod"
+          class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+        >
+          <option class="bg-gray-800" value="">Select payment method</option>
+          <option class="bg-gray-800" *ngFor="let method of availablePaymentMethods" [value]="method.id">{{ method.name }}</option>
+        </select>
+      </div>
+
+      <!-- Intended Move Date -->
+      <div>
+        <app-datepicker formControlName="intendedMoveDate" label="Intended Move Date" (dateChange)="onDateChange($event)"> </app-datepicker>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="w-full bg-blue-500 rounded-xl py-4 px-4 flex items-center justify-center">
+        <span class="bg-clip-text text-transparent text-sm font-semibold bg-white">Submit Proposal</span>
+      </button>
+
+      <!-- Terms Text -->
+      <h4 class="text-center bg-clip-text text-transparent text-xs font-semibold bg-gray-500">
+        By submitting a proposal, you agree to our terms<br />
+        and conditions.
+      </h4>
+    </div>
+  </form>
+</div>
+
+<!-- Success Notification -->
+<div *ngIf="proposalSuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <div class="flex items-center justify-center size-12 bg-green-500 aspect-square">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40">
+      <path
+        d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+      />
+    </svg>
+  </div>
+  <div class="px-4 py-2">
+    <div class="mx-3">
+      <span class="font-semibold text-green-500">Success</span>
+      <p class="text-sm text-gray-200">Your proposal has been submitted successfully!</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="proposalFailed" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+  <div class="flex items-center justify-center size-12 bg-red-500 aspect-square">
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40">
+      <path
+        d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+      ></path>
+    </svg>
+  </div>
+  <div class="px-4 py-2">
+    <div class="mx-3">
+      <span class="font-semibold text-red-500">Error</span>
+      <p class="text-sm text-gray-200">{{ errorMessage }}</p>
+    </div>
+  </div>
+</div>

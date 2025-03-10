@@ -1,0 +1,154 @@
+<div class="w-full bg-gray-900 p-10">
+  <h1 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white pb-5">Add Contract</h1>
+  <p class="font-medium text-sm bg-clip-text text-transparent bg-white">
+    As a Realtor, you have the authority to add a new contract. Please complete the form below with all the necessary information. Ensure that all details are accurate to facilitate a smooth
+    processing of the contract. If you require assistance, feel free to contact support.
+  </p>
+</div>
+
+<form [formGroup]="contractForm" (ngSubmit)="onSubmit()" class="p-10">
+  <!-- Property and Customer Info Cards -->
+  <div class="grid grid-cols-2 gap-10 mb-5">
+    <div class="bg-gray-800/30 p-6 rounded-2xl border border-gray-700/30">
+      <label class="bg-clip-text bg-gray-600 text-transparent text-sm font-medium">Property</label>
+      <div class="bg-clip-text bg-white text-transparent text-lg mt-2">{{ proposal?.propertyTitle }}</div>
+    </div>
+
+    <div class="bg-gray-800/30 p-6 rounded-2xl border border-gray-700/30">
+      <label class="bg-clip-text bg-gray-600 text-transparent text-sm font-medium">Customer</label>
+      <div class="bg-clip-text bg-white text-transparent text-lg mt-2">{{ proposal?.userName }}</div>
+    </div>
+  </div>
+
+  <!-- DATES -->
+  <div class="grid grid-cols-2 gap-10 mb-5">
+    <app-datepicker formControlName="startDate" label="Start Date" (dateChange)="onStartDateChange($event)"></app-datepicker>
+    <app-datepicker formControlName="endDate" label="End Date" (dateChange)="onEndDateChange($event)"></app-datepicker>
+  </div>
+
+  <!-- PAYMENTS INPUT -->
+  <div class="flex gap-10 mb-5 items-stretch w-full">
+    <div class="flex-1">
+      <label for="value" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Property Price</label>
+      <input
+        id="value"
+        type="number"
+        formControlName="value"
+        min="0"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      />
+    </div>
+    <div class="flex-1">
+      <label for="additionalFees" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Additional Fees</label>
+      <input
+        id="additionalFees"
+        type="number"
+        formControlName="additionalFees"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      />
+    </div>
+    <div class="flex-1">
+      <label for="paymentFrequency" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Payment Frequency</label>
+      <select
+        id="paymentFrequency"
+        formControlName="paymentFrequency"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      >
+        <option value="" class="bg-gray-800 text-gray-600 font-medium" disabled selected>Select a frequency</option>
+        <option *ngFor="let frequency of paymentFrequencies" [value]="frequency" class="bg-gray-800">
+          {{ frequency }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb-5">
+    <label for="contractType" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Contract Type</label>
+    <div class="grid grid-cols-2 gap-10">
+      <!-- Aqui usamos grid para garantir consistência -->
+      <label *ngFor="let type of contractTypes" class="flex items-center">
+        <input type="radio" formControlName="contractType" [value]="type" class="sr-only peer" />
+        <!-- Botão com texto e input estilizado -->
+        <div
+          class="flex items-center justify-center w-full h-24 rounded-xl cursor-pointer text-gray-700 bg-transparent border-2 border-dashed border-gray-700 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 transition duration-200"
+        >
+          <span class="font-semibold text-base bg-clip-text text-transparent bg-white">{{ type }}</span>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <!-- Status, Signature Date and Security Deposit  -->
+  <div class="flex gap-10 mb-5 items-stretch w-full">
+    <!-- Renewal Option -->
+    <div class="flex-1">
+      <label for="renewalOption" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Renewal Option</label>
+      <select
+        id="renewalOption"
+        formControlName="renewalOption"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      >
+        <option [ngValue]="true" class="bg-gray-800">Automatic</option>
+        <option [ngValue]="false" class="bg-gray-800">Manual</option>
+      </select>
+    </div>
+
+    <div class="flex-1">
+      <label for="status" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Status</label>
+      <select
+        formControlName="status"
+        id="status"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      >
+        <option value="" class="bg-gray-800 text-gray-600">Select status</option>
+        <option *ngFor="let status of contractStatuses" [value]="status" class="bg-gray-800">{{ status }}</option>
+      </select>
+    </div>
+
+    <!-- Signature Date -->
+    <div class="flex-1">
+      <app-datepicker formControlName="signatureDate" label="Signature Date"> </app-datepicker>
+    </div>
+    <!-- Security Deposit -->
+    <div class="flex-1">
+      <label for="securityDeposit" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Security Deposit</label>
+      <input
+        id="securityDeposit"
+        type="number"
+        formControlName="securityDeposit"
+        class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+      />
+    </div>
+  </div>
+
+  <!-- Insurance Details -->
+  <div class="mb-5">
+    <label for="insuranceDetails" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Insurance Details</label>
+    <textarea
+      id="insuranceDetails"
+      rows="5"
+      formControlName="insuranceDetails"
+      class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+    ></textarea>
+  </div>
+
+  <!-- Notes -->
+  <div class="mb-5">
+    <label for="notes" class="block text-sm font-medium bg-clip-text bg-gray-600 text-transparent mb-2">Notes</label>
+    <textarea
+      id="notes"
+      formControlName="notes"
+      class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+    ></textarea>
+  </div>
+  <!-- Submit Button -->
+  <button type="submit" class="w-full bg-blue-500 rounded-xl py-4 px-4 flex items-center justify-center">
+    <span class="bg-clip-text text-transparent text-sm font-semibold bg-white">Submit Contract</span>
+  </button>
+
+  <!-- Terms Text -->
+  <h4 class="text-center bg-clip-text text-transparent text-xs font-semibold bg-gray-500 mt-5">
+    By creating this contract, you confirm all details are accurate<br />
+    and comply with our legal requirements and terms of service.
+  </h4>
+</form>

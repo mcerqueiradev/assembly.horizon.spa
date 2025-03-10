@@ -1,0 +1,58 @@
+<header class="relative w-svw h-screen overflow-hidden">
+  <div id="header-info" class="relative z-10 flex h-full justify-between flex-col gap-5 md:gap-10">
+    <!-- Navigation -->
+    <nav class="flex relative justify-between items-center p-5 md:p-10">
+      <a id="logo" class="max-w-28 md:max-w-40 h-full flex items-center" href="/">
+        <svg class="h-auto w-full fill-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1453 208">
+          <path
+            fill-rule="evenodd"
+            d="M1421.000,208.000 L1320.000,55.000 L1320.000,208.000 L1287.000,208.000 L1287.000,1.000 L1318.000,1.000 L1420.000,154.000 L1420.000,1.000 L1453.000,1.000 L1453.000,208.000 L1421.000,208.000 ZM1151.476,207.990 C1094.568,207.990 1048.403,165.190 1048.403,104.339 C1048.403,43.780 1094.568,0.980 1151.476,0.980 C1208.964,0.980 1254.548,43.780 1254.548,104.339 C1254.548,165.190 1208.964,207.990 1151.476,207.990 ZM1151.476,30.095 C1111.408,30.095 1082.373,58.628 1082.373,104.339 C1082.373,150.050 1111.408,179.166 1151.476,179.166 C1191.544,179.166 1220.578,150.050 1220.578,104.339 C1220.578,58.628 1191.544,30.095 1151.476,30.095 ZM890.000,180.000 L984.000,32.000 L891.000,32.000 L891.000,1.000 L1023.000,1.000 L1023.000,30.000 L929.000,177.000 L1023.000,177.000 L1023.000,208.000 L890.000,208.000 L890.000,180.000 ZM821.000,1.000 L854.000,1.000 L854.000,208.000 L821.000,208.000 L821.000,1.000 ZM743.000,208.000 L695.000,125.000 L670.000,125.000 L670.000,208.000 L637.000,208.000 L637.000,1.000 L707.000,1.000 C754.907,1.000 778.424,31.260 778.424,64.160 C778.424,88.035 764.970,113.557 731.000,122.000 L783.000,208.000 L743.000,208.000 ZM745.000,64.000 C745.000,43.619 732.841,30.000 707.000,30.000 L670.000,30.000 L670.000,98.000 L707.000,98.000 C732.841,98.000 745.000,84.090 745.000,64.000 ZM501.745,207.990 C444.837,207.990 398.672,165.190 398.672,104.339 C398.672,43.780 444.837,0.980 501.745,0.980 C559.233,0.980 604.817,43.780 604.817,104.339 C604.817,165.190 559.233,207.990 501.745,207.990 ZM501.745,30.095 C461.677,30.095 432.643,58.628 432.643,104.339 C432.643,150.050 461.677,179.166 501.745,179.166 C541.813,179.166 570.847,150.050 570.847,104.339 C570.847,58.628 541.813,30.095 501.745,30.095 ZM333.000,118.000 L33.000,118.000 L33.000,208.000 L-0.000,208.000 L-0.000,1.000 L33.000,1.000 L33.000,91.000 L333.000,91.000 L333.000,1.000 L366.000,1.000 L366.000,208.000 L333.000,208.000 L333.000,118.000 Z"
+          />
+        </svg>
+      </a>
+      <ul class="flex gap-3 md:gap-5">
+        <li>
+          <button (click)="navigateToLogin()" class="btn btn-ghost">
+            <span class="text-body">Sign in</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="flex gap-10 justify-between p-10">
+      <div #imageContainer class="relative">
+        <img *ngFor="let image of images" [src]="image.src" [alt]="image.alt" class="hidden absolute" #imageElement />
+
+        <div class="hover-area hidden sm:block" (mousemove)="onMouseMove($event)" (mouseleave)="onMouseLeave()" (click)="navigateToProperties()">
+          <div class="mb-10 text-xl bg-clip-text text-transparent bg-gray-300 tracking-wide font-medium">
+            <h5>Select your preferred neighborhood,</h5>
+            <h5>book a private tour, and receive</h5>
+            <h5>a custom offer within 48 hours.</h5>
+          </div>
+          <button class="border-b-2 border-gray-300 flex gap-5 text-gray-300">
+            <span class="text-xl bg-clip-text text-transparent bg-gray-300 font-pp font-medium">Explore it</span>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+              <path
+                fill-rule="evenodd"
+                d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="text-5xl bg-clip-text text-transparent bg-gray-300">
+        <h3>Curated high-end properties with</h3>
+        <h3>service for the modern homeowner.</h3>
+        <h3>Available for purchase or long-term lease.</h3>
+      </div>
+    </div>
+
+    <div class="relative w-full mb-14">
+      <div #slider class="relative whitespace-nowrap">
+        <h1 #firstText class="inline-block relative m-0 pr-[50px] text-[12vw] sm:text-[8vw] tracking-tight bg-clip-text text-transparent bg-gray-300">Horizon Real Estate Agency you Trust.</h1>
+        <h1 #secondText class="inline-block relative m-0 pr-[50px] text-[8vw] tracking-tight bg-clip-text text-transparent bg-gray-300">Horizon Real Estate Agency you Trust.</h1>
+      </div>
+    </div>
+  </div>
+</header>

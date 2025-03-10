@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  img {
+    position: absolute;
+    pointer-events: none;
+    max-width: 200px; /* Ajuste conforme necessário */
+    height: auto;
+  }
+  
+  .hover-area {
+    position: relative;
+    z-index: 1;
+  }

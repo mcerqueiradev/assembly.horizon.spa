@@ -1,0 +1,104 @@
+<section class="relative flex items-center justify-center w-screen h-screen overflow-hidden font-inter bg-gray-950">
+  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-lg text-center">
+      <!-- TEXT -->
+      <div class="mx-auto max-w-xl text-center mb-20">
+        <h1 class="inline-flex font-extrabold text-4xl md:text-4xl bg-clip-text text-transparent bg-white">Get started today!</h1>
+        <p class="mt-4 text-gray-500">Get started today and unlock exclusive features. Sign in to your Horizon dashboard to explore exciting real estate opportunities!</p>
+      </div>
+      <!--FORM -->
+      <form method="post" class="mx-auto mb-0 mt-8 max-w-md">
+        <div class="mb-5">
+          <label for="email" class="sr-only">Email</label>
+          <div class="relative">
+            <input
+              type="email"
+              name="email"
+              [(ngModel)]="loginObj.email"
+              required
+              required
+              class="w-full rounded-xl text-sm text-slate-300 p-3 border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 invalid:border-red-500 invalid:text-red-600 focus:outline-none focus:ring-0"
+              placeholder="Enter email"
+            />
+
+            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+        <div class="mb-5">
+          <label for="password" class="sr-only">Password</label>
+          <div class="relative">
+            <input
+              type="password"
+              name="password"
+              [(ngModel)]="loginObj.password"
+              required
+              class="w-full rounded-xl text-sm text-slate-300 p-3 border border-slate-800/70 supports-backdrop-blur:bg-white/95 bg-slate-800/50 focus:outline-none focus:ring-0"
+              placeholder="Enter password"
+            />
+            <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <p class="text-sm text-slate-500">No account? <a class="text-blue-600 cursor-pointer" (click)="signUp()">Sign up</a></p>
+          <button type="submit" (click)="onLogin()" class="inline-block rounded-xl bg-blue-600 hover:bg-blue-400 transition-all duration-200 px-5 py-3 text-sm font-medium text-white">Sign in</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CONFIRMATION MODAL  *ngIf="loginSuccess" -->
+  <div *ngIf="loginSuccess" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+    <div class="flex items-center justify-center bg-emerald-500 w-14">
+      <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-emerald-500">Success</span>
+        <p class="text-sm text-slate-300">Redirecting to dashboard...</p>
+      </div>
+    </div>
+  </div>
+  <!--ERROR MODAL *ngIf="loginFailure" -->
+  <div *ngIf="loginFailure" class="absolute flex w-full max-w-sm overflow-hidden bg-slate-800 rounded-xl shadow-md bottom-5 right-5">
+    <div class="flex items-center justify-center w-14 bg-red-500">
+      <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"
+        />
+      </svg>
+    </div>
+
+    <div class="px-4 py-2 -mx-3">
+      <div class="mx-3">
+        <span class="font-semibold text-red-500">Error</span>
+        <p class="text-sm text-slate-300">Incorrect email or password!</p>
+      </div>
+    </div>
+  </div>
+</section>
+<router-outlet></router-outlet>

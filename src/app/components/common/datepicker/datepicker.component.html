@@ -1,0 +1,49 @@
+<div class="relative">
+  <label [for]="label" class="block text-caption bg-gray-500 mb-2">{{ label }}</label>
+  <input
+    [id]="label"
+    type="text"
+    [value]="selectedDate | date : 'yyyy-MM-dd'"
+    (click)="toggleDatepicker()"
+    readonly
+    class="block w-full appearance-none rounded-xl border border-gray-700/30 bg-gray-800/30 px-6 py-3 text-gray-300 placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+  />
+
+  <div *ngIf="showDatepicker" class="absolute z-10 mt-1 w-64 bg-gray-900 rounded-xl overflow-hidden">
+    <div class="p-2 flex justify-between items-center">
+      <button (click)="prevMonth()" class="p-1 hover:bg-blue-600 rounded-full text-gray-300 transition-all duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path fill-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <span class="font-semibold text-sm bg-clip-text text-transparent bg-white">{{ selectedDate | date : 'MMMM yyyy' }}</span>
+      <button (click)="nextMonth()" class="p-1 hover:bg-blue-600 rounded-full text-gray-300 transition-all duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+          <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    <div class="grid grid-cols-7 gap-1 p-2">
+      <div *ngFor="let day of ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']" class="font-semibold text-sm bg-clip-text text-transparent bg-gray-400 text-center">
+        {{ day }}
+      </div>
+      <ng-container *ngFor="let day of calendarDays">
+        <div
+          *ngIf="day"
+          (click)="isDateSelectable(day) && selectDate(day)"
+          class="text-center p-1 cursor-pointer rounded-xl duration-200 transition-all"
+          [ngClass]="{
+            'bg-blue-500 text-white': day.getTime() === selectedDate.getTime(),
+            'opacity-50 cursor-not-allowed': !isDateSelectable(day),
+            'hover:bg-blue-400': isDateSelectable(day)
+          }"
+        >
+          <span class="font-semibold text-sm bg-clip-text text-transparent" [ngClass]="{ 'bg-white': isDateSelectable(day), 'bg-gray-500': !isDateSelectable(day) }">
+            {{ day.getDate() }}
+          </span>
+        </div>
+        <div *ngIf="!day" class="text-center p-1"></div>
+      </ng-container>
+    </div>
+  </div>
+</div>

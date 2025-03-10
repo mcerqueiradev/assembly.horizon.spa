@@ -1,0 +1,121 @@
+<section class="flex flex-col font-inter ml-64 px-10">
+  <div class="flex flex-1 flex-col p-10">
+    <div class="grid grid-cols-4 gap-10">
+      <div class="col-span-3 supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+          <div>
+            <h3 class="font-extrabold text-4xl bg-clip-text text-transparent bg-white">{{ invoice?.invoiceNumber }}</h3>
+            <span class="text-xs font-medium text-green-500 bg-green-500/20 p-2 rounded-full mt-2 inline-block">{{ invoice?.status }}</span>
+          </div>
+          <button class="bg-blue-500 text-white rounded-md py-2 px-4">Download Receipt</button>
+        </div>
+
+        <!-- Property Info -->
+        <div class="flex items-center gap-4 mb-10 p-6 supports-backdrop-blur:bg-white/95 bg-gray-900/30 rounded-xl">
+          <div class="bg-blue-500 rounded-xl size-20 aspect-square overflow-hidden">
+            <img [src]="invoice!.images[0].imagePath" alt="Imagem da Propriedade" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <h4 class="font-bold text-xl bg-clip-text text-transparent bg-white mb-2">{{ invoice?.propertyName }}</h4>
+            <p class="text-sm text-gray-400">{{ invoice?.propertyAddress }}</p>
+          </div>
+        </div>
+
+        <!-- Payment Info Cards -->
+        <div class="grid grid-cols-4 gap-5 mb-10">
+          <div class="supports-backdrop-blur:bg-white/95 bg-gray-900/30 rounded-xl p-6">
+            <h4 class="font-bold bg-clip-text text-transparent bg-gray-300 mb-2">Transaction Type</h4>
+            <p class="text-xl font-extrabold bg-clip-text text-transparent bg-white">{{ invoice?.paymentFrequency }}</p>
+          </div>
+          <div class="supports-backdrop-blur:bg-white/95 bg-gray-900/30 rounded-xl p-6">
+            <h4 class="font-bold bg-clip-text text-transparent bg-gray-300 mb-2">Contract Type</h4>
+            <p class="text-xl font-extrabold bg-clip-text text-transparent bg-white">{{ invoice?.contractType }}</p>
+          </div>
+          <div class="supports-backdrop-blur:bg-white/95 bg-gray-900/30 rounded-xl p-6">
+            <h4 class="font-bold bg-clip-text text-transparent bg-gray-300 mb-2">Amount Paid</h4>
+            <p class="text-xl font-extrabold bg-clip-text text-transparent bg-green-600">${{ formatCurrency(invoice?.amount) }}</p>
+          </div>
+          <div class="supports-backdrop-blur:bg-white/95 bg-gray-900/30 rounded-xl p-6">
+            <h4 class="font-bold bg-clip-text text-transparent bg-gray-300 mb-2">Transaction ID</h4>
+            <p class="text-sm font-medium bg-clip-text text-transparent bg-white">{{ invoice?.transactionNumber }}</p>
+          </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="grid grid-cols-2 gap-10 mb-10">
+          <div>
+            <h4 class="font-bold text-lg bg-clip-text text-transparent bg-white mb-4">Property Owner</h4>
+            <div class="space-y-2">
+              <p class="font-medium text-gray-300">Real Estate LLC - {{ invoice?.realtorName }}</p>
+              <p class="text-sm text-gray-400">{{ invoice?.realtorEmail }}</p>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg bg-clip-text text-transparent bg-white mb-4">Tenant</h4>
+            <div class="space-y-2">
+              <p class="font-medium text-gray-300">{{ invoice?.customerName }}</p>
+              <p class="text-sm text-gray-400">{{ invoice?.customerEmail }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Breakdown -->
+        <div class="mb-10">
+          <h4 class="font-bold text-lg bg-clip-text text-transparent bg-white mb-4">Payment Breakdown</h4>
+          <div class="border border-gray-800/50 rounded-xl overflow-hidden">
+            <div class="divide-y divide-gray-800/50">
+              <ng-container *ngIf="invoice?.contractType?.toLowerCase() === 'rent'">
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Base Rent</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).baseRent) }}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Utilities</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).utilities) }}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Maintenance Fee</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).maintenanceFee) }}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Security Deposit</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).securityDeposit) }}</div>
+                </div>
+              </ng-container>
+
+              <ng-container *ngIf="invoice?.contractType?.toLowerCase() === 'sale'">
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Down Payment</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).downPayment) }}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Mortgage Payment</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).mortgagePayment) }}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Closing Costs</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).closingCosts) }}</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 p-4 text-sm">
+                  <div class="text-gray-300">Security Deposit</div>
+                  <div class="text-right text-gray-300">${{ formatCurrency(calculateBreakdown(invoice?.amount, invoice?.contractType, invoice?.securityDeposit).securityDeposit) }}</div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total -->
+        <div class="flex justify-end">
+          <div class="w-72">
+            <div class="flex justify-between text-lg font-bold pt-3 border-t border-gray-800/50">
+              <span class="bg-clip-text text-transparent bg-white">Total Paid</span>
+              <span class="bg-clip-text text-transparent bg-green-600">${{ formatCurrency(invoice?.amount) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,51 @@
+<div class="flex flex-col items-start justify-center my-20">
+  <h1 class="text-[12vw] sm:text-[6vw] bg-clip-text text-transparent bg-gray-300 mb-10 leading-tight font-medium px-20">What’s on your <span class="font-bold">mind?</span></h1>
+</div>
+
+<div class="">
+  <div class="grid grid-cols-1 lg:grid-cols-2">
+    <div *ngFor="let property of properties" class="group relative overflow-hidden aspect-square">
+      <!-- Main Image -->
+      <img [src]="property.images?.[0]?.imagePath || '/default-property-image.jpg'" [alt]="property.title" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+      <!-- Overlay Content - Appears on Hover -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
+        <div class="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+          <!-- Title and Price -->
+          <div class="flex justify-between items-end mb-4">
+            <h1 class="text-3xl heading-primary">{{ property.title }}</h1>
+            <span class="text-3xl heading-primary">${{ property.price | number }}</span>
+          </div>
+
+          <!-- Property Details -->
+          <div class="flex gap-4 mb-3 text-body bg-white">
+            <span>{{ property.bedrooms }} beds</span>
+            <span>{{ property.bathrooms }} baths</span>
+            <span>{{ property.size }} sq ft</span>
+          </div>
+
+          <!-- Address -->
+          <p class="text-body bg-white mb-4">{{ property.street }}, {{ property.city }}, {{ property.postalCode }}</p>
+
+          <!-- Tags -->
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs">
+              {{ property.type }}
+            </span>
+          </div>
+
+          <!-- Action Button -->
+          <button (click)="navigateToProperty(property.id)" class="mt-4 w-full bg-blue-500 rounded-xl py-4 px-4 flex items-center justify-center">
+            <span class="bg-clip-text text-transparent text-sm font-semibold bg-white">View Details</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-12">
+    <button class="bg-transparent border border-blue-400 py-4 px-8 rounded-xl hover:bg-blue-400/10 transition-all">
+      <span class="font-medium text-blue-400" (click)="navigateToProperties()">See More Properties</span>
+    </button>
+  </div>
+</div>

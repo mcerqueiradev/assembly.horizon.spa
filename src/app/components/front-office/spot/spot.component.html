@@ -1,0 +1,31 @@
+<section class="w-full p-10 flex flex-col items-center justify-center font-inter">
+  <div class="h-screen flex items-center justify-center">
+    <div class="text-[10vw] sm:text-[4vw] text-white leading-[1.1] max-w-screen-xl font-medium" #textContainer>
+      <p>Your Gateway to Exceptional Rentals and Sales.</p>
+      <p>Explore a curated selection of homes tailored for your lifestyle, whether you seek to rent or buy.</p>
+      <p>Experience seamless transactions and find your perfect space in vibrant communities.</p>
+    </div>
+  </div>
+  <div id="main-property" class="relative w-screen flex flex-col items-center justify-center">
+    <div class="property-content p-10 w-full mb-20">
+      <div class="flex justify-between flex-col sm:flex-row gap-10 sm:gap-5">
+        <div class="sm:max-w-screen-xl">
+          <h2 class="text-[10vw] sm:text-[4vw] text-transparent bg-clip-text bg-white leading-[1.1] font-bold mb-5 sm:mb-10">{{ property!.title }}</h2>
+          <p class="text-xl sm:text-2xl text-transparent bg-clip-text bg-gray-300 max-w-screen-lg line-clamp-6">{{ property.description }}</p>
+        </div>
+        <div class="self-end">
+          <p class="text-[10vw] sm:text-[4vw] text-transparent bg-clip-text bg-white leading-[1.1] font-extrabold">${{ property!.price }}</p>
+          <button class="mt-5 text-transparent bg-clip-text bg-blue-600 font-medium text-2xl hover:bg-blue-400" (click)="navigateToProperty(property.id!)">View Property</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery flex gap-10 overflow-hidden">
+      @for (image of property.images; track $index) {
+      <div class="gallery-item w-full h-[32rem] overflow-hidden aspect-video rounded-3xl">
+        <img [src]="image.imagePath" alt="Property Image" class="w-full h-full object-cover" />
+      </div>
+      }
+    </div>
+  </div>
+</section>

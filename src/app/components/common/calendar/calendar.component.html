@@ -1,0 +1,43 @@
+<div class="bg-gray-800 rounded-lg shadow-xl p-6">
+  <!-- Calendar Header -->
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-xl font-bold text-white">{{ currentMonth }} {{ currentYear }}</h2>
+    <div class="flex space-x-2">
+      <button (click)="previousMonth()" class="p-2 rounded-full hover:bg-gray-700 text-gray-400 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button (click)="nextMonth()" class="p-2 rounded-full hover:bg-gray-700 text-gray-400 hover:text-white transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Calendar Grid -->
+  <div class="grid grid-cols-7 gap-1">
+    <!-- Weekday headers -->
+    <div *ngFor="let day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']" class="text-center text-gray-400 text-sm py-2">
+      {{ day }}
+    </div>
+
+    <!-- Calendar days -->
+    <div
+      *ngFor="let date of calendarDays"
+      (click)="selectDate(date)"
+      [class]="
+        'relative p-2 text-center cursor-pointer transition-colors ' +
+        (date ? 'hover:bg-gray-700' : '') +
+        (isToday(date) ? ' bg-blue-600 text-white rounded-full' : '') +
+        (selectedDate && date && selectedDate.toDateString() === date.toDateString() ? ' bg-blue-500 text-white rounded-full' : ' text-gray-300')
+      "
+    >
+      {{ date?.getDate() }}
+
+      <!-- Event indicator -->
+      <div *ngIf="hasEvents(date)" class="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-green-500 rounded-full"></div>
+    </div>
+  </div>
+</div>

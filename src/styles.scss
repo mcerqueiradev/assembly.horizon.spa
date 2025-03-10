@@ -1,0 +1,283 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  
+  .custom-scrollbar {
+    @apply overflow-y-auto 
+    [&::-webkit-scrollbar]:w-1.5 
+    [&::-webkit-scrollbar]:bg-transparent 
+    [&::-webkit-scrollbar-track]:rounded-full 
+    [&::-webkit-scrollbar-thumb]:rounded-full 
+    [&::-webkit-scrollbar-track]:bg-gray-800/30 
+    [&::-webkit-scrollbar-thumb]:bg-gray-600 
+    hover:[&::-webkit-scrollbar-thumb]:bg-gray-500;
+  }
+
+  .widget-container {
+    @apply bg-gray-800/30 rounded-3xl p-10;
+  }
+
+  .widget-profile-container {
+    @apply bg-gray-800/30 rounded-xl p-10;
+  }
+
+  .heading-primary {
+    @apply font-extrabold text-2xl bg-clip-text text-transparent bg-white;
+  }
+
+  .heading-secondary {
+    @apply font-extrabold text-xl bg-clip-text text-transparent bg-white;
+  }
+
+  .heading-tertiary {
+    @apply font-bold text-lg bg-clip-text text-transparent bg-white;
+  }
+
+  .heading-quaternary {
+    @apply font-bold text-base bg-clip-text text-transparent bg-white;
+  }
+
+  .heading-display {
+    @apply font-extrabold text-4xl bg-clip-text text-transparent bg-white;
+  }
+
+  .heading-hero {
+    @apply font-black text-5xl bg-clip-text text-transparent bg-white;
+  }
+
+  .heading-subtitle {
+    @apply font-medium text-lg bg-clip-text text-transparent bg-gray-400;
+  }
+
+  .text-body {
+    @apply text-sm font-medium bg-clip-text text-transparent bg-gray-300;
+  }
+
+  .text-caption {
+    @apply text-xs font-semibold bg-clip-text text-transparent bg-gray-300;
+  }
+
+  .text-value {
+    @apply text-2xl font-extrabold bg-clip-text text-transparent bg-white;
+  }
+
+  .text-overline {
+    @apply text-xs font-bold uppercase tracking-wider bg-clip-text text-transparent bg-gray-400;
+  }
+
+  /* Section Headers */
+  .section-header {
+    @apply flex items-center gap-3 mb-3;
+  }
+
+  .section-marker {
+    @apply h-8 w-1 bg-blue-500 rounded-full;
+  }
+
+  .section-title {
+    @apply heading-primary;
+  }
+
+  .section-description {
+    @apply text-body max-w-lg;
+  }
+
+  /* Stats Card */
+  .stats-container {
+    @apply grid grid-cols-3 gap-4;
+  }
+
+  .stat-card {
+    @apply bg-gray-900/50 rounded-xl p-4;
+  }
+
+  .stat-label {
+    @apply text-caption mb-1;
+  }
+
+  .stat-value {
+    @apply text-value;
+  }
+
+  .stat-trend {
+    @apply text-xs mb-1;
+  }
+
+  .stat-trend-up {
+    @apply text-green-400;
+  }
+
+  .stat-trend-down {
+    @apply text-red-400;
+  }
+
+  /* Content Sections */
+  .content-section {
+    @apply mb-6;
+  }
+
+  .content-header {
+    @apply flex items-center gap-3 mb-3;
+  }
+
+  .content-body {
+    @apply text-body;
+  }
+
+  /* Base Button */
+  .btn {
+    @apply rounded-xl py-4 px-4 flex items-center justify-center transition-all duration-300;
+  }
+
+  .btn-text {
+    @apply bg-clip-text text-transparent text-sm font-semibold;
+  }
+
+  /* Primary Buttons */
+  .btn-primary {
+    @apply btn bg-blue-500 hover:bg-blue-600;
+  }
+  .btn-primary .btn-text {
+    @apply bg-white;
+  }
+
+  /* Secondary Buttons */
+  .btn-secondary {
+    @apply btn bg-gray-800/30 hover:bg-gray-700/40;
+  }
+  .btn-secondary .btn-text {
+    @apply bg-gray-200;
+  }
+
+  /* Success Buttons */
+  .btn-success {
+    @apply btn bg-green-500 hover:bg-green-600;
+  }
+  .btn-success .btn-text {
+    @apply bg-white;
+  }
+
+  /* Danger Buttons */
+  .btn-danger {
+    @apply btn bg-red-500 hover:bg-red-600;
+  }
+  .btn-danger .btn-text {
+    @apply bg-white;
+  }
+
+  /* Ghost Buttons */
+  .btn-ghost {
+    @apply btn bg-transparent border-2 border-gray-700 hover:border-gray-600;
+  }
+  .btn-ghost .btn-text {
+    @apply bg-gray-200;
+  }
+
+  /* Size Variations */
+  .btn-sm {
+    @apply py-2 px-3;
+  }
+  .btn-lg {
+    @apply py-5 px-6;
+  }
+
+  /* Width Variations */
+  .btn-full {
+    @apply w-full;
+  }
+  .btn-auto {
+    @apply w-auto;
+  }
+
+  /* Disabled State */
+  .btn-disabled {
+    @apply opacity-50 cursor-not-allowed;
+  }
+}
+
+
+  @font-face {
+    font-family: 'PP Neue Montreal Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PP Neue Montreal Book'), url('/public/fonts/ppneuemontreal-book.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'PP Neue Montreal Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PP Neue Montreal Italic'), url('/public/fonts/ppneuemontreal-italic.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'PP Neue Montreal Thin';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PP Neue Montreal Thin'), url('/public/fonts/ppneuemontreal-thin.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'PP Neue Montreal Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PP Neue Montreal Medium'), url('/public/fonts/ppneuemontreal-medium.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'PP Neue Montreal SemiBold italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PP Neue Montreal SemiBold italic'), url('/public/fonts/ppneuemontreal-semibolditalic.woff') format('woff');
+    }
+    
+
+    @font-face {
+    font-family: 'PP Neue Montreal Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('PP Neue Montreal Bold'), url('/public/fonts/ppneuemontreal-bold.woff') format('woff');
+    }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: initial;
+  }
+
+  html, body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+
+  body {
+    width: calc(100% + 18px);
+    margin-right: -18px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image: url(/noise.png);
+    background-size: 200px;
+  }

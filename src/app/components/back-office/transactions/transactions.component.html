@@ -1,0 +1,227 @@
+<section class="flex flex-col font-inter ml-0 lg:ml-64 px-10 min-h-screen">
+  <div class="flex mb-10 gap-10">
+    <div class="flex flex-1 gap-5">
+      <div class="supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 size-56 flex flex-col justify-between">
+        <h3 class="font-bold bg-clip-text text-transparent bg-gray-300">Transactions</h3>
+        <span class="text-4xl font-extrabold bg-clip-text text-transparent bg-white">{{ transactionsResponse.transactions.length }}</span>
+        <p class="text-xs bg-clip-text text-transparent bg-green-500 font-medium">5% increase this month</p>
+      </div>
+
+      <div class="flex-1 supports-backdrop-blur:bg-white/95 bg-gray-900/30 rounded-3xl p-10 size-56 flex flex-col justify-between">
+        <h3 class="font-bold bg-clip-text text-transparent bg-gray-300">Total Spend</h3>
+        <span class="text-4xl font-extrabold bg-clip-text text-transparent bg-white">${{ formatNumber(transactionValue()) }}</span>
+        <p class="text-xs bg-clip-text text-transparent bg-white font-medium">Total active value</p>
+      </div>
+
+      <div class="supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 size-56 flex flex-col justify-between">
+        <h3 class="font-bold bg-clip-text text-transparent bg-gray-300">Avg. Duration</h3>
+        <span class="text-4xl font-extrabold bg-clip-text text-transparent bg-white">35</span>
+        <p class="text-xs bg-clip-text text-transparent bg-white font-medium">months per contract</p>
+      </div>
+      <div class="supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 size-56 flex flex-col justify-between flex-1"></div>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-4 gap-10 flex-grow h-full">
+    <div class="col-span-3 w-full supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 flex flex-col h-full">
+      <div class="relative">
+        <!-- Header/Filter Area -->
+        <div class="flex justify-between items-center mb-6">
+          <h3 class="font-extrabold text-4xl bg-clip-text text-transparent bg-white mb-5">Transactions</h3>
+          <div class="flex gap-4">
+            <div class="relative">
+              <button (click)="toggleFilterMenu()" class="px-4 py-2 bg-gray-800/50 rounded-xl text-gray-300 hover:bg-gray-700/50 flex items-center gap-2">
+                <span>Filter</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"
+                  />
+                </svg>
+              </button>
+
+              <div *ngIf="isFilterMenuOpen" class="absolute right-0 mt-2 w-48 bg-gray-900 rounded-xl shadow-lg z-50 border border-gray-800/30">
+                <div class="">
+                  <div class="text-sm bg-clip-text bg-gray-400 text-transparent font-medium px-3 py-4 border-b border-gray-800">Transaction Status</div>
+                  <div class="space-y-1 p-2">
+                    <button (click)="filterTransactionsByStatus('all')" class="w-full text-left px-3 py-2 hover:bg-gray-700/50 rounded-lg text-gray-300">All Transactions</button>
+                    <button (click)="filterTransactionsByStatus('Completed')" class="w-full text-left px-3 py-2 hover:bg-gray-700/50 rounded-lg text-green-400">Completed</button>
+                    <button (click)="filterTransactionsByStatus('Pending')" class="w-full text-left px-3 py-2 hover:bg-gray-700/50 rounded-lg text-orange-400">Pending</button>
+                    <button (click)="filterTransactionsByStatus('Failed')" class="w-full text-left px-3 py-2 hover:bg-gray-700/50 rounded-lg text-red-400">Failed</button>
+                    <button (click)="filterTransactionsByStatus('Refunded')" class="w-full text-left px-3 py-2 hover:bg-gray-700/50 rounded-lg text-blue-400">Refunded</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button (click)="openNewTransactionModal()" class="px-4 py-2 bg-blue-500/20 rounded-xl text-blue-400 hover:bg-blue-500/30">New Transaction</button>
+          </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          @if (filteredTransactions.length > 0) {
+          <!-- Transaction Card -->
+          <div *ngFor="let transaction of filteredTransactions" class="bg-gray-800/30 border border-gray-900 rounded-xl p-5 hover:border-gray-800/30 transition-all duration-300">
+            <!-- Card Header -->
+            <div class="flex items-center gap-4 mb-4">
+              <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl w-12 h-12 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 text-white">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </div>
+              <div class="flex-1">
+                <h3 class="text-transparent bg-clip-text bg-white font-extrabold line-clamp-1">{{ transaction.transactionNumber }}</h3>
+                <p class="text-transparent bg-clip-text bg-gray-400 text-sm font-medium line-clamp-1">{{ getPaymentMethodName(transaction.paymentMethod) }}</p>
+              </div>
+            </div>
+
+            <!-- Card Content -->
+            <div class="space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-transparent bg-clip-text bg-gray-400 text-sm font-medium">Amount</span>
+                @if (transaction.status === 'Completed') {
+                <span class="text-transparent bg-clip-text bg-green-400 text-sm font-medium">${{ transaction.amount }}</span>
+                } @else if (transaction.status === 'Pending') {
+                <span class="text-transparent bg-clip-text bg-orange-400 text-sm font-medium">${{ transaction.amount }}</span>
+                } @else if (transaction.status === 'Failed') {
+                <span class="text-transparent bg-clip-text bg-red-400 text-sm font-medium">${{ transaction.amount }}</span>
+                } @else if (transaction.status === 'Refunded') {
+                <span class="text-transparent bg-clip-text bg-blue-400 text-sm font-medium">${{ transaction.amount }}</span>
+                } @else {
+                <span class="text-transparent bg-clip-text bg-gray-400 text-sm font-medium">${{ transaction.amount }}</span>
+                }
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-transparent bg-clip-text bg-gray-400 text-sm font-medium">Date</span>
+                <span class="text-transparent bg-clip-text bg-gray-300 text-sm font-medium">{{ transaction.date | date : 'MM/dd/yyyy' }}</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-transparent bg-clip-text bg-gray-400 text-sm font-medium">Status</span>
+                <div
+                  class="flex items-center justify-center px-3 py-1 rounded-full"
+                  [ngClass]="{
+                    'bg-green-500/10 border-green-500/20': transaction.status === 'Completed',
+                    'bg-orange-500/10 border-orange-500/20': transaction.status === 'Pending',
+                    'bg-red-500/10 border-red-500/20': transaction.status === 'Cancelled',
+                    'bg-blue-500/10 border-blue-500/20': transaction.status === 'Refunded'
+                  }"
+                >
+                  <span
+                    class="text-transparent bg-clip-text text-xs font-medium p-0 m-0"
+                    [ngClass]="{
+                      'bg-green-400': transaction.status === 'Completed',
+                      'bg-orange-400': transaction.status === 'Pending',
+                      'bg-red-400': transaction.status === 'Cancelled',
+                      'bg-blue-400': transaction.status === 'Refunded'
+                    }"
+                  >
+                    {{ transaction.status }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="mt-4 flex justify-end gap-2">
+              <button
+                *ngIf="transaction.status === 'Pending'"
+                (click)="openPaymentModal(transaction)"
+                class="p-2 rounded-lg hover:bg-gray-700/50 transition-all duration-300 text-gray-400 hover:text-green-300"
+                title="Mark as Paid"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                  <path
+                    fill-rule="evenodd"
+                    d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <button
+                (click)="viewInvoiceDetails(transaction.invoiceId)"
+                class="p-2 rounded-lg hover:bg-gray-700/50 transition-all duration-300 text-gray-400 hover:text-blue-300"
+                title="View Invoice Details"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                  <path
+                    fill-rule="evenodd"
+                    d="M3.75 3.375c0-1.036.84-1.875 1.875-1.875H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375Zm10.5 1.875a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25ZM12 10.5a.75.75 0 0 1 .75.75v.028a9.727 9.727 0 0 1 1.687.28.75.75 0 1 1-.374 1.452 8.207 8.207 0 0 0-1.313-.226v1.68l.969.332c.67.23 1.281.85 1.281 1.704 0 .158-.007.314-.02.468-.083.931-.83 1.582-1.669 1.695a9.776 9.776 0 0 1-.561.059v.028a.75.75 0 0 1-1.5 0v-.029a9.724 9.724 0 0 1-1.687-.278.75.75 0 0 1 .374-1.453c.425.11.864.186 1.313.226v-1.68l-.968-.332C9.612 14.974 9 14.354 9 13.5c0-.158.007-.314.02-.468.083-.931.831-1.582 1.67-1.694.185-.025.372-.045.56-.06v-.028a.75.75 0 0 1 .75-.75Zm-1.11 2.324c.119-.016.239-.03.36-.04v1.166l-.482-.165c-.208-.072-.268-.211-.268-.285 0-.113.005-.225.015-.336.013-.146.14-.309.374-.34Zm1.86 4.392V16.05l.482.165c.208.072.268.211.268.285 0 .113-.005.225-.015.336-.012.146-.14.309-.374.34-.12.016-.24.03-.361.04Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+              <button class="p-2 rounded-lg hover:bg-gray-700/50 transition-all duration-300 text-gray-400 hover:text-blue-300" title="View Transaction Details">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                  <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          } @else {
+          <div class="col-span-4 text-center p-8">
+            <p class="bg-clip-text text-transparent bg-gray-400 text-[2vw] font-medium py-20">No transactions found.</p>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-span-1 w-full supports-backdrop-blur:bg-white/95 bg-gray-800/30 rounded-3xl p-10 flex flex-col h-full">
+      <h3 class="font-extrabold text-2xl bg-clip-text text-transparent bg-white mb-5 relative flex">Upcoming</h3>
+
+      <ul>
+        <li *ngFor="let transaction of upcomingTransactions" class="border-b border-dashed border-gray-800/50 pb-5 mb-5">
+          <div class="flex justify-between items-center mb-4">
+            <h1 class="font-medium text-gray-300 text-lg">${{ transaction.amount }}</h1>
+            <h2 class="font-medium text-gray-400 text-xs">{{ transaction.date | date : 'dd, MMM yyyy' }}</h2>
+          </div>
+          <div id="property_upcoming" class="flex gap-4 items-center mb-2">
+            <div class="bg-blue-500 rounded-xl size-14 aspect-square"></div>
+            <div>
+              <h4 class="font-medium text-gray-300 text-sm line-clamp-1">{{ transaction.transactionNumber }}</h4>
+              <h5 class="font-medium text-gray-300 text-xs">{{ transaction.paymentMethod }}</h5>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-medium text-gray-300 text-xs line-clamp-1">{{ transaction.description }}</h4>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div *ngIf="isNewTransactionModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 relative rounded-xl p-10 w-fit">
+    <app-add-transaction (closeModal)="closeNewTransactionModal()"></app-add-transaction>
+    <button class="absolute top-3 right-3 text-gray-600 rounded-full p-3 hover:text-red-600 transition-all duration-200" (click)="closeNewTransactionModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div *ngIf="isPaymentModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+  <div class="bg-gray-900 relative rounded-xl p-10 w-fit">
+    <app-process-payment *ngIf="selectedTransaction" [transaction]="selectedTransaction" (closeModal)="closePaymentModal()"></app-process-payment>
+    <button class="absolute top-3 right-3 text-gray-600 rounded-full p-3 hover:text-red-600 transition-all duration-200" (click)="closePaymentModal()">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+    </button>
+  </div>
+</div>
