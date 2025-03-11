@@ -7,7 +7,7 @@ import { Property, PropertyImage, PropertyStatus } from '../_models/property';
   providedIn: 'root',
 })
 export class PropertyService {
-  private apiUrl = 'https://localhost:7220/api/Property';
+  private apiUrl = 'https://assemblyhorizonsvc-production.up.railway.app/api/Property';
 
   constructor(private httpClient: HttpClient) {}
 
