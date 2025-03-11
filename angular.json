@@ -31,7 +31,7 @@
             "polyfills": [
               "zone.js"
             ],
-            "baseHref": "/assembly.horizon.spa/",
+            "baseHref": "/",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
