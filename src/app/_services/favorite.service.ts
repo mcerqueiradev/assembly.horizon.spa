@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateFavoriteCommand } from '../_models/Favorite/createFavoriteCommand';
@@ -9,7 +10,7 @@ import { FavoritesResponse } from '../_models/Favorite/favoritesResponse';
   providedIn: 'root',
 })
 export class FavoriteService {
-  private apiUrl = 'https://localhost:7220/api/Favorites';
+  private apiUrl = `${environment.apiUrl}/api/Favorites`;
 
   constructor(private httpClient: HttpClient) {}
 

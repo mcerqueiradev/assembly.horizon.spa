@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProposalResponse } from '../_models/Proposal/proposalResponse';
@@ -8,7 +9,7 @@ import { Proposal, ProposalNegotiation } from '../_models/Proposal/proposal';
   providedIn: 'root',
 })
 export class ProposalService {
-  private apiUrl = 'https://localhost:7220/api/Proposal';
+  private apiUrl = `${environment.apiUrl}/api/Proposal`;
 
   constructor(private httpClient: HttpClient) {}
 

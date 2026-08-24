@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserPostResponse } from '../_models/Post/userPost';
@@ -7,7 +8,7 @@ import { UserPostResponse } from '../_models/Post/userPost';
   providedIn: 'root',
 })
 export class UserPostService {
-  private apiUrl = 'https://localhost:7220/api/UserPost';
+  private apiUrl = `${environment.apiUrl}/api/UserPost`;
 
   constructor(private http: HttpClient) {}
 

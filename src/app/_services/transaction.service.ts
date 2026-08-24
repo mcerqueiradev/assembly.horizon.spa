@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ import { TransactionsResponse } from '../_models/Transaction/transactionsRespons
   providedIn: 'root',
 })
 export class TransactionService {
-  private apiUrl = 'https://localhost:7220/api/Transaction';
+  private apiUrl = `${environment.apiUrl}/api/Transaction`;
 
   constructor(private http: HttpClient) {}
 

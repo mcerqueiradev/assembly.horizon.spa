@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
@@ -9,7 +10,7 @@ import { Register } from '../_models/register';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'https://localhost:7220/api';
+  private apiUrl = `${environment.apiUrl}/api`;
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 

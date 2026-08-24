@@ -1,4 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserProfile } from '../_models/User/userProfile';
@@ -7,7 +8,7 @@ import { UserProfile } from '../_models/User/userProfile';
   providedIn: 'root',
 })
 export class UserProfileService {
-  private apiUrl = 'https://localhost:7220/api/UserProfile';
+  private apiUrl = `${environment.apiUrl}/api/UserProfile`;
 
   constructor(private http: HttpClient) {}
 

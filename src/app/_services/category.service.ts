@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RetrieveAllCategoriesResponse } from '../_models/Category/retrieveAllCategoriesResponse';
@@ -9,7 +10,7 @@ import { RetrieveCategoryResponse } from '../_models/Category/retrieveCategoryRe
 })
 export class CategoryService {
 
-  private apiUrl = 'https://localhost:7220/api/Category';
+  private apiUrl = `${environment.apiUrl}/api/Category`;
 
   constructor(private httpClient: HttpClient) {}
 

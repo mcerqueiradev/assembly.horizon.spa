@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
 import { Notification } from '../_models/Notification/notification';
@@ -10,7 +11,7 @@ import { NotificationResponse } from '../_models/Notification/notificationRespon
 })
 export class NotificationService {
 
-  private apiUrl = 'https://localhost:7220/api/Notification';
+  private apiUrl = `${environment.apiUrl}/api/Notification`;
 
   constructor(private http: HttpClient) {}
 

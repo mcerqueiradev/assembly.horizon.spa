@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Property, PropertyImage, PropertyStatus } from '../_models/property';
@@ -7,7 +8,7 @@ import { Property, PropertyImage, PropertyStatus } from '../_models/property';
   providedIn: 'root',
 })
 export class PropertyService {
-  private apiUrl = 'https://assemblyhorizonsvc-production.up.railway.app/api/Property';
+  private apiUrl = `${environment.apiUrl}/api/Property`;
 
   constructor(private httpClient: HttpClient) {}
 

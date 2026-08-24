@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateCommentResponse } from '../_models/Comment/createCommentResponse';
@@ -12,7 +13,7 @@ import { ToggleHelpfulResponse } from '../_models/Comment/toggleHelpfulResponse'
 })
 export class CommentService {
 
-  private apiUrl = 'https://localhost:7220/api/Comment';
+  private apiUrl = `${environment.apiUrl}/api/Comment`;
   
   constructor(private http: HttpClient) {}
 

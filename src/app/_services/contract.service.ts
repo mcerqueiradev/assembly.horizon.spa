@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Contract, CreateContractResponse } from '../_models/contract';
@@ -8,7 +9,7 @@ import { ContractResponse } from '../_models/contractResponse';
   providedIn: 'root',
 })
 export class ContractService {
-  private apiUrl = 'https://localhost:7220/api/Contract';
+  private apiUrl = `${environment.apiUrl}/api/Contract`;
 
   constructor(private http: HttpClient) {}
 

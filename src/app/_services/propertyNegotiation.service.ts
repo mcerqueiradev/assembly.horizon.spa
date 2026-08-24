@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NegotiationCommand } from '../_models/Negotiation/negotiationCommand';
@@ -9,7 +10,7 @@ import { Negotiation } from '../_models/Negotiation/negotiation';
   providedIn: 'root',
 })
 export class PropertyNegotiationService {
-  private apiUrl = 'https://localhost:7220/api/PropertyNegotiation';
+  private apiUrl = `${environment.apiUrl}/api/PropertyNegotiation`;
 
   constructor(private httpClient: HttpClient) {}
 
