@@ -178,16 +178,6 @@
                 <div class="flex flex-col">
                   <p class="text-body mb-1">Total Portfolio Value</p>
                 </div>
-                <div class="flex items-center gap-1 bg-green-500/20 text-green-400 px-2 py-1 rounded-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.577 4.878a.75.75 0 0 1 .919-.53l4.78 1.281a.75.75 0 0 1 .531.919l-1.281 4.78a.75.75 0 0 1-1.449-.387l.81-3.022a19.407 19.407 0 0 0-5.594 5.203.75.75 0 0 1-1.139.093L7 10.06l-4.72 4.72a.75.75 0 0 1-1.06-1.061l5.25-5.25a.75.75 0 0 1 1.06 0l3.074 3.073a20.923 20.923 0 0 1 5.545-4.931l-3.042.815a.75.75 0 0 1-.919-.53Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <span class="text-xs font-medium">+8.2%</span>
-                </div>
               </div>
               <h4 class="text-2xl font-bold text-white self-start">{{ totalPrice() }}</h4>
             </div>
@@ -199,91 +189,10 @@
                   <p class="text-body mb-1">Active Listings</p>
                   <h4 class="text-2xl font-bold text-white">{{ properties.length }}</h4>
                 </div>
-                <div class="flex items-center gap-1 bg-blue-500/20 text-blue-400 px-2 py-1 rounded-lg">
-                  <span class="text-xs font-medium">12 Featured</span>
-                </div>
-              </div>
-              <div class="flex items-center gap-4">
-                <div class="flex-1 bg-gray-800 rounded-full h-2">
-                  <div class="bg-blue-500 h-2 rounded-full" style="width: 65%"></div>
-                </div>
-                <span class="text-xs text-neutral-400">65% Occupied</span>
               </div>
             </div>
           </div>
 
-          <!-- Secondary Metrics -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Monthly Revenue -->
-            <div class="bg-gradient-to-br from-blue-600/20 to-blue-700/20 rounded-xl p-4">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-blue-500/20 rounded-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-blue-500">
-                    <path
-                      d="M10.75 10.818v2.614A3.13 3.13 0 0 0 11.888 13c.482-.315.612-.648.612-.875 0-.227-.13-.56-.612-.875a3.13 3.13 0 0 0-1.138-.432ZM8.33 8.62c.053.055.115.11.184.164.208.16.46.284.736.363V6.603a2.45 2.45 0 0 0-.35.13c-.14.065-.27.143-.386.233-.377.292-.514.627-.514.909 0 .184.058.39.202.592.037.051.08.102.128.152Z"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0Zm-8-6a.75.75 0 0 1 .75.75v.316a3.78 3.78 0 0 1 1.653.713c.426.33.744.74.925 1.2a.75.75 0 0 1-1.395.55 1.35 1.35 0 0 0-.447-.563 2.187 2.187 0 0 0-.736-.363V9.3c.698.093 1.383.32 1.959.696.787.514 1.29 1.27 1.29 2.13 0 .86-.504 1.616-1.29 2.13-.576.377-1.261.603-1.96.696v.299a.75.75 0 1 1-1.5 0v-.3c-.697-.092-1.382-.318-1.958-.695-.482-.315-.857-.717-1.078-1.188a.75.75 0 1 1 1.359-.636c.08.173.245.376.54.569.313.205.706.353 1.138.432v-2.748a3.782 3.782 0 0 1-1.653-.713C6.9 9.433 6.5 8.681 6.5 7.875c0-.805.4-1.558 1.097-2.096a3.78 3.78 0 0 1 1.653-.713V4.75A.75.75 0 0 1 10 4Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-sm text-neutral-400">Monthly Revenue</p>
-                  <p class="text-lg font-bold text-white">$128.5k</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 text-xs">
-                <span class="text-green-400">↑ 12.5%</span>
-                <span class="text-neutral-400">from last month</span>
-              </div>
-            </div>
-
-            <!-- Occupancy Rate -->
-            <div class="bg-gradient-to-br from-purple-600/20 to-purple-700/20 rounded-xl p-4">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-purple-500/20 rounded-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-purple-500">
-                    <path
-                      d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5ZM10 8a.75.75 0 0 1 .75.75v1.5h1.5a.75.75 0 0 1 0 1.5h-1.5v1.5a.75.75 0 0 1-1.5 0v-1.5h-1.5a.75.75 0 0 1 0-1.5h1.5v-1.5A.75.75 0 0 1 10 8Z"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-sm text-neutral-400">New Listings</p>
-                  <p class="text-lg font-bold text-white">8</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 text-xs">
-                <span class="text-green-400">↑ 4</span>
-                <span class="text-neutral-400">this week</span>
-              </div>
-            </div>
-
-            <!-- ROI -->
-            <div class="bg-gradient-to-br from-orange-600/20 to-orange-700/20 rounded-xl p-4">
-              <div class="flex items-center gap-3 mb-3">
-                <div class="p-2 bg-orange-500/20 rounded-lg">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-orange-500">
-                    <path
-                      fill-rule="evenodd"
-                      d="M5.5 17a4.5 4.5 0 0 1-1.44-8.765 4.5 4.5 0 0 1 8.302-3.046 3.5 3.5 0 0 1 4.504 4.272A4 4 0 0 1 15 17H5.5Zm3.75-2.75a.75.75 0 0 0 1.5 0V9.66l1.95 2.1a.75.75 0 1 0 1.1-1.02l-3.25-3.5a.75.75 0 0 0-1.1 0l-3.25 3.5a.75.75 0 1 0 1.1 1.02l1.95-2.1v4.59Z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-sm text-neutral-400">Avg. ROI</p>
-                  <p class="text-lg font-bold text-white">18.2%</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-2 text-xs">
-                <span class="text-green-400">↑ 2.4%</span>
-                <span class="text-neutral-400">vs. last year</span>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="col-span-6 lg:col-span-2 text-neutral-300 bg-gray-800/30 rounded-3xl p-8 flex flex-col h-full">
           <!-- Header Section -->
@@ -302,12 +211,12 @@
               <p class="stat-value">{{ properties.length }}</p>
             </div>
             <div class="stat-card">
-              <p class="stat-label">Monthly Views</p>
-              <p class="stat-value">12.5k</p>
+              <p class="stat-label">Favorites</p>
+              <p class="stat-value">{{ favorites.length }}</p>
             </div>
             <div class="stat-card">
-              <p class="stat-label">Avg. Time to Sell</p>
-              <p class="stat-value">45 days</p>
+              <p class="stat-label">Appointments</p>
+              <p class="stat-value">{{ propertyVisitResponse.visits.length }}</p>
             </div>
           </div>
 
@@ -501,7 +410,7 @@
           <div class="flex justify-between items-start mb-6">
             <div>
               <h1 class="inline-flex font-extrabold text-2xl bg-clip-text text-transparent bg-white pb-2">Deal Proposals</h1>
-              <h6 class="text-sm text-gray-400">10 offers in total</h6>
+              <h6 class="text-sm text-gray-400">View your deal proposals</h6>
             </div>
             <svg class="w-6 h-6 text-blue-500 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />

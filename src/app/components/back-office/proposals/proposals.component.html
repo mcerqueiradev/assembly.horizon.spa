@@ -19,16 +19,7 @@
         </div>
         <div class="space-y-2">
           <h3 class="text-4xl font-bold text-white">{{ proposals.length }}</h3>
-          <p class="text-green-400 text-sm flex items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z"
-                clip-rule="evenodd"
-              />
-            </svg>
-            10% increase this month
-          </p>
+          <p class="text-gray-400 text-sm">Total proposals</p>
         </div>
       </div>
     </div>
@@ -70,8 +61,8 @@
           </div>
         </div>
         <div class="space-y-2">
-          <h3 class="text-4xl font-bold text-white">75%</h3>
-          <p class="text-gray-400 text-sm">Last 30 days</p>
+          <h3 class="text-4xl font-bold text-white">{{ acceptanceRate() }}%</h3>
+          <p class="text-gray-400 text-sm">Approved proposals</p>
         </div>
       </div>
     </div>

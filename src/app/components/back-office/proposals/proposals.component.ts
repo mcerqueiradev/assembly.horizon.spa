@@ -88,6 +88,14 @@ export class ProposalsComponent implements OnInit {
     this.totalValue = this.proposals.reduce((sum, prop) => sum + prop.proposedValue, 0);
   }
 
+  acceptanceRate(): number {
+    if (!this.proposals.length) {
+      return 0;
+    }
+    const accepted = this.proposals.filter((p) => p.status === 'Approved' || p.status === 'Completed').length;
+    return Math.round((accepted / this.proposals.length) * 100);
+  }
+
   navigateToProposal(id: string) {
     this.router.navigate([`back-office/dashboard/proposal/`, id]);
   }

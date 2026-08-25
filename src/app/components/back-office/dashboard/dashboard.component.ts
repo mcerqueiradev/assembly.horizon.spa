@@ -23,7 +23,6 @@ import { Favorite } from '../../../_models/Favorite/favorite';
 })
 export class DashboardComponent implements OnInit {
   date = new Date();
-  totalPages: number = 10;
   loggedUserDetails: UserModel | null = null;
   users: UserModel[] = [];
   errorMessage: string = '';
