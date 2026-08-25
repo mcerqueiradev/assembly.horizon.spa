@@ -70,6 +70,9 @@ export class AddPropertyComponent implements OnInit {
   loggedUserId: string = '';
   selectedFiles: File[] = [];
   imageMetadatas: PropertyImage[] = [];
+  imagePreviews: { file: File; url: string }[] = [];
+  isDragging = false;
+  readonly maxImages = 20;
 
   countries: string[] = [];
   states: string[] = [];
@@ -196,45 +199,69 @@ export class AddPropertyComponent implements OnInit {
 
   onFileSelected(event: Event) {
     const element = event.target as HTMLInputElement;
-    const fileList: FileList | null = element.files;
+    this.addFiles(element.files);
+    // Allow selecting the same file again after removing it.
+    element.value = '';
+  }
 
-    if (fileList && fileList.length > 0) {
-      // Adicionar os arquivos selecionados à lista de arquivos já existentes
-      this.selectedFiles = [...this.selectedFiles, ...Array.from(fileList)];
-      this.imageMetadatas = this.selectedFiles.map((file) => ({
-        id: '',
-        propertyId: '',
-        fileName: file.name,
-        file: file,
-      }));
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = true;
+  }
 
-      console.log('Image metadatas:', this.imageMetadatas);
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+  }
 
-      // Atualizar o controle do formulário
-      this.propertyForm.patchValue({ images: this.imageMetadatas });
-      this.propertyForm.get('images')?.updateValueAndValidity();
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragging = false;
+    this.addFiles(event.dataTransfer?.files ?? null);
+  }
 
-      // Limpar a pré-visualização antiga
-      const uploadedImagesDiv = document.getElementById('uploadedImages');
-      if (uploadedImagesDiv) {
-        uploadedImagesDiv.innerHTML = ''; // Limpa as imagens anteriores
+  removeImage(index: number) {
+    this.imagePreviews.splice(index, 1);
+    this.syncImages();
+  }
 
-        // Criar a pré-visualização para todas as imagens selecionadas
-        this.selectedFiles.forEach((file) => {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            const imgElement = document.createElement('img');
-            imgElement.src = e.target.result; // URL da imagem
-            imgElement.alt = file.name;
-            imgElement.classList.add('w-32', 'h-32', 'object-cover', 'rounded-lg', 'mr-2', 'mb-2'); // Classes CSS
-            uploadedImagesDiv.appendChild(imgElement);
-          };
-          reader.readAsDataURL(file); // Ler o arquivo como URL
-        });
-      }
-    } else {
-      console.log('No files selected');
+  private addFiles(fileList: FileList | null) {
+    if (!fileList || fileList.length === 0) {
+      return;
     }
+
+    const incoming = Array.from(fileList).filter((file) => file.type.startsWith('image/'));
+
+    for (const file of incoming) {
+      if (this.imagePreviews.length >= this.maxImages) {
+        break;
+      }
+      // Skip duplicates (same name + size).
+      const alreadyAdded = this.imagePreviews.some((p) => p.file.name === file.name && p.file.size === file.size);
+      if (alreadyAdded) {
+        continue;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreviews.push({ file, url: e.target.result });
+        this.syncImages();
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  private syncImages() {
+    this.selectedFiles = this.imagePreviews.map((p) => p.file);
+    this.imageMetadatas = this.imagePreviews.map((p) => ({
+      id: '',
+      propertyId: '',
+      fileName: p.file.name,
+      file: p.file,
+    }));
+
+    this.propertyForm.patchValue({ images: this.imageMetadatas });
+    this.propertyForm.get('images')?.updateValueAndValidity();
   }
 
   get amenities(): FormArray {
