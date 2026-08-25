@@ -134,7 +134,6 @@ export class ProposalDetailComponent implements OnInit {
       this.propertyNegotiationService.getNegotiationsByProposal(proposalId).subscribe({
         next: (negotiations) => {
           this.negotiations = negotiations;
-          console.log(negotiations);
           this.generateTimeline();
         },
         error: (error) => {

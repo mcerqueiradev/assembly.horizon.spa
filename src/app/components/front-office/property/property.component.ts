@@ -124,7 +124,6 @@ export class PropertyComponent implements OnInit {
       .subscribe((data) => {
         if (data) {
           this.user = data;
-          console.log('User:', this.user);
         }
       });
   }

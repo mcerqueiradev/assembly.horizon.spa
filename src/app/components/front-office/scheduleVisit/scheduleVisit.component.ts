@@ -50,17 +50,14 @@ export class ScheduleVisitComponent implements OnInit {
       userId: this.loggedUser?.userId,
       realtorId: this.realtor?.userId
     });
-    console.log('Form Initial State:', this.visitForm.value);
   }
 
   selectTimeSlot(slot: TimeSlot): void {
-    console.log('Selected TimeSlot:', slot);
     this.selectedTimeSlot = slot;
     this.visitForm.patchValue({ timeSlot: slot });
   }
 
   onSubmit(): void {
-    console.log('Form Submit State:', this.visitForm.value);
     
     const user = this.authService.getLoggedUser();
     if (!user?.userId) {
@@ -78,16 +75,13 @@ export class ScheduleVisitComponent implements OnInit {
         notes: this.visitForm.get('notes')?.value || ''
       };
 
-      console.log('Command to be sent:', command);
 
       this.visitService.createVisit(command).subscribe({
         next: (response) => {
-          console.log('API Response:', response);
           this.visitSuccess = true;
           setTimeout(() => this.closeModal.emit(), 2000);
         },
         error: (error) => {
-          console.log('API Error:', error);
           this.visitFailed = true;
           this.errorMessage = Object.values(error.error?.errors || {})
             .flat()
@@ -104,7 +98,6 @@ export class ScheduleVisitComponent implements OnInit {
     this.visitService
       .getAvailableTimeSlots(this.property.id, this.formatDateForApi(date))
       .subscribe(slots => {
-        console.log('Available Slots:', slots);
         this.availableTimeSlots = slots;
         this.resetTimeSlot();
       });

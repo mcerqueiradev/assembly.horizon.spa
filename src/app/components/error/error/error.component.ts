@@ -29,7 +29,6 @@ export class ErrorComponent implements OnInit {
 
     this.route.queryParams.subscribe((params) => {
       const name = params['name'];
-      console.log(name);
     });
   }
 

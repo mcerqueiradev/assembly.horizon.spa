@@ -72,7 +72,6 @@ export class AddProposalComponent implements OnInit {
         paymentMethod: formValue.paymentMethod,
         intendedMoveDate: new Date(formValue.intendedMoveDate).toISOString()
     };
-      console.log(proposal);
 
       this.proposalService.createProposal(proposal).subscribe({
         next: (response) => {

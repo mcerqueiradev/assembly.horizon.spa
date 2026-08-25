@@ -108,7 +108,6 @@ export class AddPropertyComponent implements OnInit {
     this.stateService.getCountries().subscribe(
       (data) => {
         this.countries = data.map((country: any) => country.name.common).sort();
-        console.log('Countries loaded:', this.countries);
       },
       (error) => {
         console.error('Error loading countries:', error);
@@ -120,7 +119,6 @@ export class AddPropertyComponent implements OnInit {
     this.categoryService.retrieveAll().subscribe({
       next: (response) => {
         this.categories = response.categories;
-        console.log('Categories loaded:', this.categories);
       },
       error: (error) => {
         console.error('Error loading categories:', error);
@@ -175,11 +173,9 @@ export class AddPropertyComponent implements OnInit {
         isActive: true,
       };
 
-      console.log('Property data before submission:', propertyData);
 
       this.propertyService.createProperty(propertyData).subscribe({
         next: (response) => {
-          console.log('Success!', response);
           this.addpropertySuccess = true;
           setTimeout(() => {
             this.router.navigateByUrl('back-office/dashboard');
@@ -191,7 +187,6 @@ export class AddPropertyComponent implements OnInit {
         },
       });
     } else {
-      console.log('Form is invalid', this.propertyForm.errors);
       this.propertyForm.markAllAsTouched();
       alert('Please fill in all required fields.');
     }

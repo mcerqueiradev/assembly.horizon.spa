@@ -9,13 +9,11 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = sessionStorage.getItem('token');
-    console.log('Current token:', token); // Verify token exists
 
     if (token && request.method !== 'OPTIONS') {
       const cloned = request.clone({
         headers: request.headers.set('Authorization', `Bearer ${token}`),
       });
-      console.log('Request with auth:', cloned.headers.get('Authorization')); // Verify header
       return next.handle(cloned);
     }
 

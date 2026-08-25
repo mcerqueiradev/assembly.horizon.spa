@@ -68,7 +68,6 @@ export class AddTransactionComponent implements OnInit {
           // Verifica se a resposta possui a propriedade 'contracts'
           if (response && response.contracts) {
             this.contracts = response.contracts;
-            console.log(this.contracts);
           } else {
             console.error('Resposta inválida do servidor');
             this.errorMessage = 'Formato inesperado dos dados de contratos.';
@@ -93,13 +92,9 @@ export class AddTransactionComponent implements OnInit {
         userId: userId
       };
 
-      console.log(userId)
-      console.log(completeTransactionData)
-      console.log(transactionData)
   
       this.transactionService.createTransaction(completeTransactionData).subscribe({
         next: (response) => {
-          console.log('Transaction created successfully:', response);
           this.transactionSuccess = true;
           setTimeout(() => {
             this.closeModal.emit();
@@ -112,7 +107,6 @@ export class AddTransactionComponent implements OnInit {
         }
       });
     } else {
-      console.log('Form is not valid');
       this.errorMessage = 'Please fill all required fields correctly.';
     }
   }

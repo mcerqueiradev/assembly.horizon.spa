@@ -20,12 +20,10 @@ export class RegisterComponent {
   constructor(private router: Router, private userService: UserService) {}
 
   onRegister() {
-    console.log(this.user);
 
     // Pass only the user object to the register method (no file upload at this point)
     this.userService.register(this.user).subscribe(
       (response) => {
-        console.log('User created successfully:', response);
         this.registerSuccess = true;
         setTimeout(() => {
           this.router.navigateByUrl('/login');

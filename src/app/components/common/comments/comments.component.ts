@@ -56,9 +56,7 @@ export class CommentsComponent implements OnInit, OnChanges  {
   }
 
   loadComments() {
-    console.log('Property ID:', this.propertyId); // Verifica se o ID está correto
     this.commentService.getCommentsByPropertyId(this.propertyId).subscribe(response => {
-        console.log(response); // Log da resposta completa
 
         // Acesse o array de comentários
         if (response && response.comments && Array.isArray(response.comments)) {

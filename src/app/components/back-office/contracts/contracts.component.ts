@@ -87,7 +87,6 @@ export class ContractsComponent implements OnInit, OnDestroy {
           if (response && response.contracts) {
             this.contracts = response.contracts;
             this.filteredContracts = this.contracts; // Atualiza os contratos filtrados
-            console.log(this.contracts);
             this.calculateSidebarMetrics();
           }
         });

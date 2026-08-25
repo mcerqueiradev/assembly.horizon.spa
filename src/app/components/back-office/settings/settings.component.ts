@@ -118,7 +118,6 @@ export class SettingsComponent implements OnInit {
     const totalFields = 6;
     let filledFields = 0;
   
-    console.log('loggedUserDetails:', this.loggedUserDetails);
   
     if (this.loggedUserDetails) {
       if (this.loggedUserDetails.firstName) {

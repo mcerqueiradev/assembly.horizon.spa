@@ -25,7 +25,6 @@ export class SpotComponent implements AfterViewInit, OnInit {
     this.propertyService.retrieveLatest().subscribe({
       next: (property) => {
         this.property = property;
-        console.log('Propriedade:', this.property);
       },
       error: (err) => {
         console.error('Erro ao buscar a última propriedade:', err);

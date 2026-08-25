@@ -104,7 +104,6 @@ export class DashboardComponent implements OnInit {
       next: (response: PropertyVisitResponse) => {
         this.zone.run(() => {
           this.propertyVisitResponse = response;
-          console.log('User visits:', this.propertyVisitResponse.visits);
         });
       },
       error: (error) => {
@@ -124,7 +123,6 @@ export class DashboardComponent implements OnInit {
     this.notificationService.getRecentNotifications(userId).subscribe({
       next: (response: NotificationResponse) => {
         this.notifications = response.notifications;
-        console.log(this.notifications);
       },
     });
   }

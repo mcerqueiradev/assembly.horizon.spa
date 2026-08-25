@@ -34,7 +34,6 @@ export class TransactionsComponent implements OnInit {
         next: (response: TransactionsResponse) => {
           this.zone.run(() => {
             this.transactionsResponse = response;
-            console.log('Transactions:', this.transactionsResponse.transactions);
           });
         },
         error: (error) => {

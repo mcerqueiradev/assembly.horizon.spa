@@ -29,7 +29,6 @@ export class DashPropertiesComponent implements OnInit {
         this.zone.run(() => {
           if (response && response.properties) {
             this.properties = response.properties;
-            console.log(this.properties);
           } else {
             console.error('Resposta inválida do servidor');
             this.errorMessage = 'Dados de imóveis inválidos';

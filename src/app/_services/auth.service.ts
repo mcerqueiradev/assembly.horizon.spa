@@ -16,7 +16,6 @@ export class AuthService {
   login(loginObj: LoginModel): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}/login`, loginObj).pipe(
       tap((response) => {
-        console.log('Login response:', response); // Check the token structure
         sessionStorage.setItem('loggedUser', JSON.stringify(response));
         sessionStorage.setItem('token', response.token);
       })

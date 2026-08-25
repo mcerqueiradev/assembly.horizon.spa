@@ -63,7 +63,6 @@ export class AddContractFromProposalComponent implements OnInit {
           startDate: proposal.intendedMoveDate,
         });
 
-        console.log('Proposal Data:', proposal);
       },
       error: (error) => {
         this.errorMessage = 'Failed to load proposal data';

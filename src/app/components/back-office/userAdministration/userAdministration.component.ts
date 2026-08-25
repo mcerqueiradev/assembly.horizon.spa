@@ -19,7 +19,6 @@ export class UserAdministrationComponent implements OnInit {
     this.userService.retrieveAll().subscribe({
       next: (users) => {
         this.users = users;
-        console.log('Users loaded successfully:', this.users.length);
       },
       error: (error) => {
         console.error('Error fetching users:', error);

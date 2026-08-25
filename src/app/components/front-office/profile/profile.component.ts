@@ -84,7 +84,6 @@ export class ProfileComponent implements OnInit {
         this.user = response.user;
         this.userPosts = response.posts.responses;
 
-        console.log(this.userProfile), console.log(this.user);
       },
       error: (error) => {
         console.error('Error loading user data:', error);

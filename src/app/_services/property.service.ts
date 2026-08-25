@@ -40,12 +40,10 @@ export class PropertyService {
         if (image.file && image.file instanceof File) {
           formData.append(`Images`, image.file, image.fileName);
         } else {
-          console.warn(`Image at index ${index} is not a valid File object`);
         }
       });
     }
 
-    console.log('FormData before sending:', formData);
 
     return this.httpClient.post(`${this.apiUrl}/Create`, formData);
   }

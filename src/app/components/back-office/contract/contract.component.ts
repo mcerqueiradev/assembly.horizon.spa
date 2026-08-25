@@ -40,7 +40,6 @@ export class ContractComponent implements OnInit {
       if (this.contractId) {
         this.contractService.retrieve(this.contractId).subscribe({
           next: (contract) => {
-            console.log('Contrato retornado:', contract); // Adicione esta linha
             this.contract = contract; // Armazena o contrato retornado
           },
           error: (error) => {

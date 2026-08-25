@@ -60,7 +60,6 @@ export class AddContractComponent implements OnInit {
         this.zone.run(() => {
           if (response && response.properties) {
             this.properties = response.properties;
-            console.log(this.properties);
           } else {
             console.error('Resposta inválida do servidor');
             this.errorMessage = 'Dados de imóveis inválidos';
@@ -82,7 +81,6 @@ export class AddContractComponent implements OnInit {
   loadUsers(): void {
     this.userService.retrieveNonAdmins().subscribe(
       (response: any) => {
-        console.log('Response from retrieveNonAdmins:', response);
 
         // Acesse o array de usuários dentro do objeto de resposta
         if (response && response.users && Array.isArray(response.users)) {
@@ -166,7 +164,6 @@ export class AddContractComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.contractForm.value);
     if (this.contractForm.valid) {
       const formValue = this.contractForm.value;
       const contractData: Contract = {
@@ -188,11 +185,9 @@ export class AddContractComponent implements OnInit {
         notes: formValue.notes,
       };
 
-      console.log('Contract data being sent:', contractData);
 
       this.contractService.createContract(contractData).subscribe(
         (response) => {
-          console.log('Contrato criado com sucesso', response);
           this.router.navigateByUrl('back-office/dashboard/contracts');
         },
         (error) => {
@@ -208,7 +203,6 @@ export class AddContractComponent implements OnInit {
       );
     } else {
       this.errorMessage = 'Por favor, preencha todos os campos obrigatórios corretamente.';
-      console.log('Form invalid', this.contractForm);
     }
   }
 }
